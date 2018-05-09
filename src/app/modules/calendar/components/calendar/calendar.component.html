@@ -1,6 +1,46 @@
+
 <p>Display event : {{displayEvent | json}}</p>
 <div *ngIf="calendarOptions">
     <ng-fullcalendar #ucCalendar [options]="calendarOptions" (eventClick)="eventClick($event.detail)" (eventDrop)="updateEvent($event.detail)"
         (eventResize)="updateEvent($event.detail)" (clickButton)="clickButton($event.detail)"></ng-fullcalendar>
 </div>clear
+<div class="container">
+    <div class="row">
+        <div >
+            <div  class="col-lg-3 col-md-3 col-sm-9 col-xs-9" style="visibility: hidden">
+                <div *ngFor="let result of calendarResult">
+                    <h4 class="group inner list-group-item-heading">
+                        <a ><input type="checkbox" name="tc" ngModel>{{ result.name }}</a>
+                      </h4>
+          
+                </div>
+            </div>
+<div  class="col-lg-6 col-md-6 col-sm-9 col-xs-9">
+        <div *ngFor="let result of calendarResult">
+                <h4 class="group inner list-group-item-heading">
+                    <a ><input type="checkbox" name="tc" ngModel>{{ result.name }}</a>
+                  </h4>
+      
+            </div>
+    <div>
+
+
+<Span>Name</Span>
+<Span>Shift</Span>
+<Span>Event</Span><br/>
+
+</div>
+    
+        
+      <div *ngFor="let result of calendarResult">
+
+        <span ><input type="checkbox" name="tc" ngModel>{{result.name}}</span>
+        <span > </span>
+        <span> </span><br/>
+        </div>
+    
+    
+
+</div></div>
+
 <router-outlet></router-outlet>
