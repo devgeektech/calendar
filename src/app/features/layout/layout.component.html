@@ -1,0 +1,8 @@
+<div>
+	<app-header *ngIf="isLogin"></app-header>
+	<div class="page-container row-fluid container-fluid"> 
+	 	<app-left-sidebar *ngIf="isLogin"></app-left-sidebar> 
+	 	<router-outlet></router-outlet>
+		<div class="chatapi-windows"> </div>
+	</div>
+</div>

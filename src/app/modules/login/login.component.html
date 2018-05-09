@@ -1,0 +1,85 @@
+<div class="container" >
+  <div class="row"> 
+    <!-- Mixins--> 
+    <!-- Pen Title-->
+    
+    <div class="container" >
+      <div *ngIf="!isForgotPage" class="card" style="margin-top:35%; position:relative;" >
+        <div class="input-container"><br/>
+          <img src="../../assets/images/zapoj.jpg"  height="50" alt="Logo">
+          <h2 class="title">Sign In</h2>
+        </div>
+        <br/>
+        <form (ngSubmit)="login()">
+          <div class="input-container" *ngIf="loginFail">
+            <span style="color:'red'; font-weight:'bold'">{{errorMessage}}</span>
+          </div>
+          <div class="input-container">
+            <input type="text" id="Username" name="email" [(ngModel)]="email" required="required"/>
+            <label for="Username">Username</label>
+            <div class="bar"></div>
+          </div>
+          <div class="input-container">
+            <input type="password" id="Password" name="password" [(ngModel)]="password" required="required"/>
+            <label for="Password">Password</label>
+            <div class="bar"></div>
+          </div>
+          <div class="input-container"> <br/>
+            <br/>
+            <br/>
+            <span class="pull-left"> <a (click)="gotoForgotPassword()" class="forgotPw"><strong>Forgot your password?</strong></a></span>
+            <button type="submit" class="btn btn-primary btn-md pull-right" >Sign In</button>
+          </div>
+          <br/>
+        </form>
+        <div class="clearfix"></div>
+        <br/>
+        <br/>
+      </div>
+      <div *ngIf="isForgotPage" class="card" style="margin-top:35%; position:relative;" >
+        <div class="input-container"><br/>
+          <img src="../../assets/images/zapoj.jpg"  height="50" alt="Logo">
+          <h2 class="title">Sign In</h2>
+        </div>
+        <br/>
+        <form (ngSubmit)="forgotPassword()">
+          <div class="input-container" *ngIf="loginFail">
+            <span style="color:'red'; font-weight:'bold'">{{errorMessage}}</span>
+          </div>
+          <div class="input-container">
+            <input type="text" id="Username" name="email" [(ngModel)]="email" required="required"/>
+            <label for="Username">Username</label>
+            <div class="bar"></div>
+          </div>
+          <div class="input-container"> <br/>
+            <br/>
+            <br/>
+            <span class="pull-left"> <a (click)="gotoLogin()" class="forgotPw"><strong>Login</strong></a></span>
+            <button type="submit" class="btn btn-primary btn-md pull-right" >Go</button>
+          </div>
+          <br/>
+        </form>
+        <div class="clearfix"></div>
+        <br/>
+        <br/>
+      </div>
+      <div class="card" style="background:none; box-shadow:none; padding-top:0px;">
+    <div class="input-container"><div class="row">
+      <br/>
+        <br/>
+        <span class="pull-left">
+        <select  id="selectLanguage" class="selectLang">
+          <option>Language</option>
+          <option>English (US)</option>
+          <option>English (UK)</option>
+          <option>Chenese</option>
+        </select>
+        </span> <span class="pull-right"></span>
+        <ul class="footer-menu text-right">
+          <li><a href="#">Policy</a></li>
+          <li><a href="#">Terms</a></li>
+        </ul>
+      </div></div></div>
+    </div>
+  </div>
+</div>
