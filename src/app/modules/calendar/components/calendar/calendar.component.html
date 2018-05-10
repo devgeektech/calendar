@@ -1,46 +1,75 @@
 
+
+<div><app-date-picker></app-date-picker></div>
 <p>Display event : {{displayEvent | json}}</p>
 <div *ngIf="calendarOptions">
     <ng-fullcalendar #ucCalendar [options]="calendarOptions" (eventClick)="eventClick($event.detail)" (eventDrop)="updateEvent($event.detail)"
         (eventResize)="updateEvent($event.detail)" (clickButton)="clickButton($event.detail)"></ng-fullcalendar>
 </div>clear
-<div class="container">
-    <div class="row">
-        <div >
-            <div  class="col-lg-3 col-md-3 col-sm-9 col-xs-9" style="visibility: hidden">
-                <div *ngFor="let result of calendarResult">
-                    <h4 class="group inner list-group-item-heading">
-                        <a ><input type="checkbox" name="tc" ngModel>{{ result.name }}</a>
-                      </h4>
-          
+
+    
+           
+<div  class="col-lg-6 col-md-6 col-sm-9 col-xs-9" style="padding: 10px" align="right">
+        
+
+        <span>Calendars</span>
+              
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#createCalendar">
+                <i class="fa fa-plus" aria-hidden="true"></i>
+              </button>
+              
+              <!-- Modal -->
+              <div class="modal fade" id="createCalendar" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h4 class="modal-title" id="exampleModalLabel">New Calendar</h4>
+                      <button type="button" class="close" align="right" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <div class="modal-body">
+                            <form>
+                                    <div class="form-group">
+                                      <!--<label for="recipient-name" class="col-form-label">Calendar Name:</label>-->
+                                      <input type="text" class="form-control" placeholder="Calendar Name" id="calendar-name">
+                                    </div>
+                                    <div class="form-group">
+                                     <!-- <label for="message-text" class="col-form-label">Report To:</label>-->
+                                      <textarea class="form-control" id="report-to" placeholder="Report To"></textarea>
+                                    </div>
+                                  </form>
+                          
+                            <!--<select>
+                                    <option *ngFor="let calendar of calendarResult" value= {{calendar._id}}>
+                                      {{calendar.name}}
+                                    </option>
+                                  </select>-->
+                    </div>
+                    <div class="modal-footer">
+                      
+                      <button type="button" class="btn btn-primary">Create Calendar</button>
+                    </div>
+                  </div>
                 </div>
-            </div>
-<div  class="col-lg-6 col-md-6 col-sm-9 col-xs-9">
-        <div *ngFor="let result of calendarResult">
-                <h4 class="group inner list-group-item-heading">
-                    <a ><input type="checkbox" name="tc" ngModel>{{ result.name }}</a>
-                  </h4>
-      
-            </div>
-    <div>
+              </div>
+        
+              <div *ngFor="let result of calendarResult">
+              <!--<div class="squaredThree">-->
+                    <input type="checkbox"   name="optionsRadios" id="checkOther" value="other">
+                    <label for="checkOther"> </label>{{result.name}}<br/>
+               <!-- </div>-->
+                 
+                   
+              </div>
+              
 
-
-<Span>Name</Span>
-<Span>Shift</Span>
-<Span>Event</Span><br/>
-
-</div>
+    
     
         
-      <div *ngFor="let result of calendarResult">
-
-        <span ><input type="checkbox" name="tc" ngModel>{{result.name}}</span>
-        <span > </span>
-        <span> </span><br/>
-        </div>
-    
+      
     
 
-</div></div>
+</div>
 
 <router-outlet></router-outlet>

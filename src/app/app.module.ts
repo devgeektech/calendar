@@ -17,6 +17,9 @@ import { LayoutComponent } from './features/layout/layout.component';
 import { HeaderComponent } from './features/layout/components/header/header.component';
 import { LeftSidebarComponent } from './features/layout/components/left-sidebar/left-sidebar.component';
 import { FullCalendarComponent } from './modules/calendar/components/calendar/calendar.component';
+
+import { DatePickerComponent } from './modules/calendar/components/date-picker/date-picker.component';
+import { DatePickerDirective } from './modules/calendar/components/date-picker/date-picker.directive';
 @NgModule({
   declarations: [
     AppComponent,
@@ -24,7 +27,9 @@ import { FullCalendarComponent } from './modules/calendar/components/calendar/ca
     HeaderComponent,
     LeftSidebarComponent,
     LayoutComponent,
-    FullCalendarComponent
+    FullCalendarComponent,
+    DatePickerComponent,
+    DatePickerDirective
   ],
   imports: [
     BrowserModule,

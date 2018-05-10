@@ -1,0 +1,89 @@
+.date-picker {
+    width: 200px;
+    position: absolute;
+    left: 25%; 
+    top:10%;
+    z-index: 999;
+    /* left: calc(100% - 200px); */
+    /* -webkit-box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);;
+    -moz-box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);;
+    box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);; */
+  }
+  
+  .dp {
+    margin: 0 !important;
+  }
+  
+  button.dp{
+    /* border: 1px solid #cccccc; */
+    border: none;
+  }
+  
+  button.dp[disabled] {
+    /*background-color: #e6e6e6;*/
+  }
+  
+  .year, .month, .year-arrow, .month-arrow, .day-names {
+    height: 20px;
+    /*background-color: white;*/
+    background-color: #ffffff;
+    color: rgb(0, 0, 0);
+  }
+  
+  .year-arrow {
+    width: 40px;
+  }
+  
+  
+  .year {
+    width: 120px;
+  }
+  
+  .month-arrow {
+    width: 40px;
+  }
+  
+  .month {
+    width: 120px;
+  }
+  
+  .day-names {
+    width: 200px;
+    color: white;
+  }
+  
+  .day-names span{
+    display: inline-block;
+    width: 28.57px !important;
+    text-align: center;
+    padding-top: 1px;
+    /*background-color: #666666;*/
+    background-color:#673AB7;
+    font-family: monospace;
+    /*font-weight: bold;*/
+  }
+  
+  .days {
+    background-color: #ffffff;
+  }
+  
+  .day {
+    width: 28.57px;
+    height: 28.57px;
+    vertical-align: middle;
+    /* border-radius: 5px; */
+    background-color: #ffffff;
+    color: rgb(0, 0, 0);
+  }
+  
+  .day.selected {
+    background-color: #e7e7e7 !important;
+    color: rgb(0, 0, 0);
+    /* border-radius:50%; */
+    outline: none !important;
+  }
+  
+  .day.exists {
+    background-color: #ffffff;
+  }
+  
