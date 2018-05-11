@@ -1,7 +1,7 @@
 import { Component, OnInit,ViewChild } from '@angular/core';
 import { CalendarComponent } from 'ng-fullcalendar';
 import { Options } from 'fullcalendar';
-import { EventService } from '../../event.service';
+import { EventService } from './event.service';
 import { CalendarService } from '../../calendar.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FormGroup, FormControl, Validators, FormBuilder, Form, NgForm } from '@angular/forms';
@@ -27,10 +27,12 @@ export class FullCalendarComponent implements OnInit {
   ]);
   
 show:boolean=false;
-  calendarOptions: Options;
+calendarOptions: Options;
+displayEvent: any;
+events = null;
   public calendarResult: any;
-  displayEvent: any;
-  events = null;
+
+  
   @ViewChild(CalendarComponent) ucCalendar: CalendarComponent;
   constructor(protected formBuilder: FormBuilder,protected eventService: EventService,protected router: Router,protected _calendarService:CalendarService) { }
 
@@ -66,10 +68,22 @@ show:boolean=false;
       data =>   this.calendarResult = data);
   }
   loadevents() {
-    console.log("test")
     this.eventService.getEvents().subscribe(data => {
       this.events = data;
     });
+  }
+
+  addEvent(){
+    const dateObj = new Date();
+    const yearMonth = dateObj.getUTCFullYear() + '-' + (dateObj.getUTCMonth() + 1);
+    let abc = {
+      id: 999,
+      title: 'Yoyo',
+      start: yearMonth + '-01',
+      end: yearMonth + '-01'
+  };
+    this.events.push(abc);
+    console.log(this.events);
   }
   clickButton(model: any) {
     this.displayEvent = model;
@@ -78,7 +92,6 @@ show:boolean=false;
     console.log(model);
   }
   eventClick(model: any) {
-    
     model = {
       event: {
         id: model.event.id,
