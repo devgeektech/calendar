@@ -24,38 +24,31 @@ export class CalendarService {
 
   getSchedulingCalendar()  {
     let serverUrl = apiBaseUrlServer + '/scheduling/calendar/';
-   // let serverUrl =  'http://35.164.120.53:3000/scheduling/calendar/';
-//let headers = new Headers({ 'Access-Control-Allow-Origin': 'true' });
    
-  // headers.append('Access-Control-Allow-Credentials', 'true');
-   
- // headers.append('Access-Control-Allow-Headers', 'Content-Type');
-  //headers.append('Access-Control-Allow-Methods', 'GET');
-  
- // headers.append('origins', '*');
-
- // headers.append('Access-Control-Allow-Origin', '*');
-
-   // let headers      = new Headers({ 'Content-Type': 'application/json' }); 
-     //let options = new RequestOptions({ headers: headers });
+    let headers= new Headers({ 'Content-Type': 'application/json' });
+    let token='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjU5NWE1NThkYmNjMDcwNTJhOTgzMjkwNiIsImlhdCI6MTUyNjAyMDU4MSwiZXhwIjoxNTI4NjEyNTgxfQ._IsAwWCUu3wbl3jiX05VnC2qGE1AEHyAWk221dMYUeA'
     
-    //let options       = new RequestOptions({ headers: headers });
-    //return this.http.get(serverUrl,options) 
-      //.map((res:Response) => res.json()) 
-      //.catch((error:any) => Observable.throw(error || 'Server error'));
-
+    headers.append('Authorization',' '+token);
+    
+     let options = new RequestOptions({ headers: headers });
+    
+    
+    return this.http.get(serverUrl,options) 
+      .map((res:Response) => res.json()) 
+      .catch((error:any) => Observable.throw(error || 'Server error'));
      
-     // return this.http.get('./calendar_scheduler_Json') 
-      //.map((res:Response) => res.json()) 
-     // .catch((error:any) => Observable.throw(error || 'Server error'));
-
-      //return this.http.get('./calendar_scheduler.json').map((res:Response) => res.json());
-     
-      return Observable.of(calendarscheduler);
- 
-
-
-
-      
+  //return Observable.of(calendarscheduler);
+}
+  createNewCalendar(calendar) {
+    let serverUrl = apiBaseUrlServer + '/scheduling/calendar/';
+    let headers = new Headers({ 'Content-Type': 'application/json' });
+    let token='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjU5NWE1NThkYmNjMDcwNTJhOTgzMjkwNiIsImlhdCI6MTUyNjAyMDU4MSwiZXhwIjoxNTI4NjEyNTgxfQ._IsAwWCUu3wbl3jiX05VnC2qGE1AEHyAWk221dMYUeA'
+    
+    headers.append('Authorization',' '+token);
+    
+   let options = new RequestOptions({ headers: headers });
+    let body = JSON.stringify(calendar);
+    return this.http.post(serverUrl, body, options ).map((res: Response) => res.json());
   }
+  
 }

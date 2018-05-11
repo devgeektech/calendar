@@ -92,7 +92,7 @@ export const calendarscheduler  = [
       {
           "_id": "5af14bcfb1b5110e34332b1c",
           "externalId": "ex1236",
-          "name": "test calendar 3",
+          "name": "test calendar 4",
           "schedules": [
               "5af036b98914a24f6bb00807",
               "5af03c3f3cdeac5215b6156e"

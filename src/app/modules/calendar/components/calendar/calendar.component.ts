@@ -4,6 +4,9 @@ import { Options } from 'fullcalendar';
 import { EventService } from '../../event.service';
 import { CalendarService } from '../../calendar.service';
 import { Router, ActivatedRoute } from '@angular/router';
+import { FormGroup, FormControl, Validators, FormBuilder, Form, NgForm } from '@angular/forms';
+
+
 
 
 
@@ -15,16 +18,28 @@ import { Router, ActivatedRoute } from '@angular/router';
 
 })
 export class FullCalendarComponent implements OnInit {
-
+  calendarForm: FormGroup;
+  calendar_name = new FormControl('', [
+    Validators.required
+  ]);
+  report_to = new FormControl('', [
+  Validators.required
+  ]);
+  
 show:boolean=false;
   calendarOptions: Options;
   public calendarResult: any;
   displayEvent: any;
   events = null;
   @ViewChild(CalendarComponent) ucCalendar: CalendarComponent;
-  constructor(protected eventService: EventService,protected router: Router,protected _calendarService:CalendarService) { }
+  constructor(protected formBuilder: FormBuilder,protected eventService: EventService,protected router: Router,protected _calendarService:CalendarService) { }
 
   ngOnInit() {
+    this.calendarForm = this.formBuilder.group({
+      calendar_name: this.calendar_name,
+      report_to: this.report_to
+      
+    });
     this.calendarOptions = {
       editable: true,
       eventLimit: false,
@@ -37,10 +52,14 @@ show:boolean=false;
     };
 
     this.getScheduleCalendar()
-   
-  
+   }
+  setClassCalendarName() {
+    return { 'has-danger': !this.calendar_name.pristine && !this.calendar_name.valid };
   }
-  
+ setClassReportTo() {
+    return { 'has-danger': !this.report_to.pristine && !this.report_to.valid };
+  }
+
   getScheduleCalendar() {
     
     this._calendarService.getSchedulingCalendar().subscribe(
@@ -89,7 +108,26 @@ show:boolean=false;
     this.displayEvent = model;
   }
   
+  
+  
+  //This function is bound to a ModalTwo button.
+public clickModalTwo() {
+  console.log("Test post onclick");
+  console.log("post",this.calendarForm.value);
 
+ // let food = {name: name};
+    this._calendarService.createNewCalendar(this.calendarForm.value).subscribe(
+       data => {
+         // refresh the list
+         this.getScheduleCalendar();
+         //return true;
+       },
+       error => {
+         console.error("Error saving New Calendar!");
+        // return Observable.throw(error);
+       }
+    );
+}
   
  
 }
