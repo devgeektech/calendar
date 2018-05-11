@@ -9722,3 +9722,10 @@ table.dataTable.display tbody tr:first-child td {
   right: 0px;
   z-index: 2000;
 }
+
+a:hover {
+  cursor: pointer;
+ 
+  /*background-image: url('./assets/images/threedots.png');*/
+
+}

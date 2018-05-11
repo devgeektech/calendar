@@ -60,12 +60,63 @@ clear
               <div *ngFor="let result of calendarResult">
               <!--<div class="squaredThree">-->
                     <input type="checkbox"   name="optionsRadios" id="checkOther" value="other">
-                    <label for="checkOther"> </label>{{result.name}}<br/>
+                    <label for="checkOther"> </label><a (click)="OpenCalendarModel()" title="more">{{result.name}}</a>
+                   
+                    <br/>
+                                                     
                <!-- </div>-->
                  
                    
               </div>
               
+              <div *ngIf="show"   style="float:right!important;position: relative;border: 2px solid lightgrey;padding: 10px;border-radius: 5px;">
+        
+                  <i class="fa fa-times deal-report-cross" aria-hidden="true" (click)="closeCalendarModel()"></i>
+                  <div class="deal-text"> 
+                      <button type="button" class="btn btn-primary"  data-toggle="modal" data-target="#createShift">
+                         Add Shift
+                        </button>  <br/><br/>
+                        <button type="button" class="btn btn-primary"  data-toggle="modal" data-target="#createCalendar">
+                            Edit
+                           </button>
+                        
+                        <!-- Modal -->
+                        <div class="modal fade" id="createShift" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                          <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                              <div class="modal-header">
+                                <h4 class="modal-title" id="exampleModalLabel">New Shift</h4>
+                                <button type="button" class="close" align="right" data-dismiss="modal" aria-label="Close">
+                                  <span aria-hidden="true">&times;</span>
+                                </button>
+                              </div>
+                              <div class="modal-body">
+                                      <form>
+                                              <div class="form-group">
+                                                <!--<label for="recipient-name" class="col-form-label">Calendar Name:</label>-->
+                                                
+                                               
+                                                  <input type="text" class="form-control" name="shift_name" formControlName="shift_name" placeholder="Shift Name">
+                                              
+                                              </div>
+                                              <div class="form-group">
+                                               <!-- <label for="message-text" class="col-form-label">Report To:</label>-->
+                                                <textarea class="form-control" name="shift_datetime" formControlName="shift_datetime" placeholder="Shift Date Time"></textarea>
+                                              </div>
+                                            </form>
+                                    
+                                      
+                              </div>
+                              <div class="modal-footer">
+                                  <button type="button" class="close"></button>
+                                <button type="button" [disabled]="!shiftForm.valid"  class="btn btn-primary" (click)="clickModalShift(shiftForm)">Create Shift</button>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                
+                  </div>
+                </div>
 
     
     

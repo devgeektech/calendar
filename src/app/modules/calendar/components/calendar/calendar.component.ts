@@ -141,6 +141,15 @@ public clickModalTwo() {
        }
     );
 }
+ 
+OpenCalendarModel() {
+  this.show = true;
+ 
+}
+
+closeCalendarModel() {
+  this.show = false;
   
+}
  
 }
