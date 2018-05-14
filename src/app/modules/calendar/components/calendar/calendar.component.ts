@@ -1,4 +1,5 @@
-import { Component, OnInit,ViewChild } from '@angular/core';
+import { Component, OnInit,ViewChild,Input } from '@angular/core';
+
 import { CalendarComponent } from 'ng-fullcalendar';
 import { Options } from 'fullcalendar';
 import { EventService } from './event.service';
@@ -19,14 +20,25 @@ import { FormGroup, FormControl, Validators, FormBuilder, Form, NgForm } from '@
 })
 export class FullCalendarComponent implements OnInit {
   calendarForm: FormGroup;
+  shiftForm: FormGroup;
   calendar_name = new FormControl('', [
     Validators.required
   ]);
   report_to = new FormControl('', [
   Validators.required
   ]);
+
+
+  shift_name = new FormControl('', [
+    Validators.required
+  ]);
+  shift_datetime = new FormControl('', [
+  Validators.required
+  ]);
   
 show:boolean=false;
+calendarid:string="";
+ EditCalendarResult:any;
 calendarOptions: Options;
 displayEvent: any;
 events = null;
@@ -40,6 +52,12 @@ events = null;
     this.calendarForm = this.formBuilder.group({
       calendar_name: this.calendar_name,
       report_to: this.report_to
+      
+    });
+
+    this.shiftForm = this.formBuilder.group({
+      shift_name: this.shift_name,
+      shift_datetime: this.shift_datetime
       
     });
     this.calendarOptions = {
@@ -60,6 +78,13 @@ events = null;
   }
  setClassReportTo() {
     return { 'has-danger': !this.report_to.pristine && !this.report_to.valid };
+  }
+
+  setClassShiftName() {
+    return { 'has-danger': !this.shift_name.pristine && !this.shift_name.valid };
+  }
+  setClassShiftDateTime() {
+    return { 'has-danger': !this.shift_datetime.pristine && !this.shift_datetime.valid };
   }
 
   getScheduleCalendar() {
@@ -127,9 +152,35 @@ events = null;
 public clickModalTwo() {
   console.log("Test post onclick");
   console.log("post",this.calendarForm.value);
+  let calendarData = 
+    { "externalId": "ex1234",
+    "name": this.calendarForm.value.calendar_name,
+    "schedules": [
+        "5af036b98914a24f6bb00807",
+        "5af037888914a24f6bb00808",
+        "5af037ec8914a24f6bb00809"
+    ],
+    "active": "true",
+    "emailNotificationList": [
+      this.calendarForm.value.report_to,
+    ],
+    "emailNotificationEnabled": "false",
+    "createdDate": "1522520474547",
+    "createdDateString":  new Date(),
+    "createdId": "emp0001",
+    "createdName": "konark",
+    "lastModifiedDate": "1522520474547",
+    "lastModifiedDateString": new Date(),
+    "lastModifiedId": "emp0001",
+    "lastModifiedName": "konark",
+    "accountId": "acc1001",
+    "status": "1",
+    "resourceBundleId": "RSB005",
+    "orgId": "001",
+    "timestamp": new Date()
+ }
 
- // let food = {name: name};
-    this._calendarService.createNewCalendar(this.calendarForm.value).subscribe(
+    this._calendarService.createNewCalendar(calendarData).subscribe(
        data => {
          // refresh the list
          this.getScheduleCalendar();
@@ -142,7 +193,9 @@ public clickModalTwo() {
     );
 }
  
-OpenCalendarModel() {
+public OpenCalendarModel(_id: string) {
+  console.log("Selected Id",_id);
+this.calendarid=_id;
   this.show = true;
  
 }
@@ -151,5 +204,80 @@ closeCalendarModel() {
   this.show = false;
   
 }
+
+public EditCalendar(calendarid: string)
+ {
+   console.log("Edit Id",calendarid);
+   this._calendarService.getSchedulingCalendarByCalendarID(calendarid).subscribe(
+    data =>  { this.EditCalendarResult = data[0]
+    console.log("Edit data",this.EditCalendarResult)
+    });
+
+
+ }
+ public clickModalTwoEdit() {
+  
+  console.log("Test Edit onclick",this.calendarid);
+  console.log("post",this.calendarForm.value);
+  let calendarData = 
+    { 
+     // "_id": this.calendarid,
+      "externalId": "ex1234",
+    "name": this.calendarForm.value.calendar_name,
+    "schedules": [
+        "5af036b98914a24f6bb00807",
+        "5af037888914a24f6bb00808",
+        "5af037ec8914a24f6bb00809"
+    ],
+    "active": "true",
+    "emailNotificationList": [
+      this.calendarForm.value.report_to,
+    ],
+    "emailNotificationEnabled": "false",
+    "createdDate": "1522520474547",
+    "createdDateString":  new Date(),
+    "createdId": "emp0001",
+    "createdName": "konark",
+    "lastModifiedDate": "1522520474547",
+    "lastModifiedDateString": new Date(),
+    "lastModifiedId": "emp0001",
+    "lastModifiedName": "konark",
+    "accountId": "acc1001",
+    "status": "1",
+    "resourceBundleId": "RSB005",
+    "orgId": "001",
+    "timestamp": new Date()
+ }
+
+    this._calendarService.updateCalendar(this.calendarid,calendarData).subscribe(
+       data => {
+         // refresh the list
+         this.getScheduleCalendar();
+         //return true;
+       },
+       error => {
+         console.error("Error saving New Calendar!");
+        // return Observable.throw(error);
+       }
+    );
+}
+public DeleteCalendar(calendarid: string)
+ {
+   console.log("Delete Id",calendarid);
+   this._calendarService.deleteCalendar(calendarid).subscribe(
+    data => {
+      // refresh the list
+      this.getScheduleCalendar();
+      //return true;
+    },
+    error => {
+      console.error("Error saving New Calendar!");
+     // return Observable.throw(error);
+     });
+
+
+ }
+
  
+
 }

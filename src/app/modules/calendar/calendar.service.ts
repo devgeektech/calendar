@@ -23,8 +23,8 @@ export class CalendarService {
   ) { }
 
   getSchedulingCalendar()  {
+    
     let serverUrl = apiBaseUrlServer + '/scheduling/calendar/';
-   
     let headers= new Headers({ 'Content-Type': 'application/json' });
     let token='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjU5NWE1NThkYmNjMDcwNTJhOTgzMjkwNiIsImlhdCI6MTUyNjAyMDU4MSwiZXhwIjoxNTI4NjEyNTgxfQ._IsAwWCUu3wbl3jiX05VnC2qGE1AEHyAWk221dMYUeA'
     
@@ -47,8 +47,58 @@ export class CalendarService {
     headers.append('Authorization',' '+token);
     
    let options = new RequestOptions({ headers: headers });
-    let body = JSON.stringify(calendar);
+    //let body = JSON.stringify(calendar);
+    let body = calendar;
     return this.http.post(serverUrl, body, options ).map((res: Response) => res.json());
   }
+
+  getSchedulingCalendarByCalendarID(calendarid)  {
+    let serverUrl = apiBaseUrlServer + '/scheduling/calendar/' + calendarid;
+   
+    let headers= new Headers({ 'Content-Type': 'application/json' });
+    let token='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjU5NWE1NThkYmNjMDcwNTJhOTgzMjkwNiIsImlhdCI6MTUyNjAyMDU4MSwiZXhwIjoxNTI4NjEyNTgxfQ._IsAwWCUu3wbl3jiX05VnC2qGE1AEHyAWk221dMYUeA'
+    
+    headers.append('Authorization',' '+token);
+    let options = new RequestOptions({ headers: headers });
+    
+    
+    return this.http.get(serverUrl,options) 
+      .map((res:Response) => res.json()) 
+      .catch((error:any) => Observable.throw(error || 'Server error'));
+     
+  //return Observable.of(calendarscheduler);
+}
+  updateCalendar(id,calendar) {
+    console.log("Api Edit Id",id)
+    let serverUrl = apiBaseUrlServer + '/scheduling/calendar/' + id;
+    let headers = new Headers({ 'Content-Type': 'application/json' });
+    let token='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjU5NWE1NThkYmNjMDcwNTJhOTgzMjkwNiIsImlhdCI6MTUyNjAyMDU4MSwiZXhwIjoxNTI4NjEyNTgxfQ._IsAwWCUu3wbl3jiX05VnC2qGE1AEHyAWk221dMYUeA'
+    
+    headers.append('Authorization',' '+token);
+    
+   let options = new RequestOptions({ headers: headers });
+    //let body = JSON.stringify(calendar);
+    let body = calendar;
+    
+
+    return this.http.put(serverUrl, body, options ).map((res: Response) => res.json());
+  }
+  deleteCalendar(id) {
+    let serverUrl = apiBaseUrlServer + '/scheduling/calendar/' +id;
+    let headers = new Headers({ 'Content-Type': 'application/json' });
+    let token='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjU5NWE1NThkYmNjMDcwNTJhOTgzMjkwNiIsImlhdCI6MTUyNjAyMDU4MSwiZXhwIjoxNTI4NjEyNTgxfQ._IsAwWCUu3wbl3jiX05VnC2qGE1AEHyAWk221dMYUeA'
+    
+    headers.append('Authorization',' '+token);
+    
+
+    
+   let options = new RequestOptions({ headers: headers });
+    
+   //let body = id;
+    
+
+   return this.http.delete(serverUrl,options);
+  }
+  
   
 }

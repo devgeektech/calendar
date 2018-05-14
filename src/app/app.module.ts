@@ -20,6 +20,9 @@ import { FullCalendarComponent } from './modules/calendar/components/calendar/ca
 
 import { DatePickerComponent } from './modules/calendar/components/date-picker/date-picker.component';
 import { DatePickerDirective } from './modules/calendar/components/date-picker/date-picker.directive';
+import { ColorPickerModule } from 'ngx-color-picker';
+ 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -38,7 +41,9 @@ import { DatePickerDirective } from './modules/calendar/components/date-picker/d
     ReactiveFormsModule,
     HttpModule,
     BrowserAnimationsModule,
-    FullCalendarModule
+    FullCalendarModule,
+    
+    ColorPickerModule
   ],
   providers: [services,EventService],
   bootstrap: [AppComponent]
