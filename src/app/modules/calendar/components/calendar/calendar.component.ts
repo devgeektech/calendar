@@ -6,6 +6,7 @@ import { EventService } from './event.service';
 import { CalendarService } from '../../calendar.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FormGroup, FormControl, Validators, FormBuilder, Form, NgForm } from '@angular/forms';
+import { Binary } from '@angular/compiler';
 
 
 
@@ -265,13 +266,14 @@ public EditCalendar(calendarid: string)
 }
 // ----Delete Calendar----//
 DeleteCalendar(calendarid) {
-
+      
   this._calendarService.deleteCalendar(calendarid)
     .subscribe(successCode => {
   //this.statusCode = successCode;
     //Expecting success code 204 from server
   this.statusCode = 204;
   this.getScheduleCalendar();
+  this.show= false;
   return true;
 },
 errorCode => this.statusCode = errorCode);    

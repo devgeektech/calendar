@@ -1,4 +1,5 @@
 
+{{show}}
 
 <div><app-date-picker></app-date-picker></div>
 <div class="header1">
@@ -110,14 +111,14 @@ clear
                   </div>
                 </div>
         
-              <div *ngIf="show"   style="float:right!important;position: relative;border: 2px solid lightgrey;padding: 10px;border-radius: 5px;">
+              <div *ngIf="show" style="float:right!important;position: relative;border: 2px solid lightgrey;padding: 10px;border-radius: 5px;">
         
                   <i class="fa fa-times deal-report-cross" aria-hidden="true" (click)="closeCalendarModel()"></i>
                   <div class="deal-text"> 
                       <button type="button" class="btn btn-primary"  data-toggle="modal" data-target="#createShift">
                          Add Shift
                         </button>  <br/><br/>
-                        <button type="button" class="btn btn-primary" (click)="EditCalendar(calendarid)"  data-toggle="modal" data-target="#editCalendar">
+                        <button  type="button" class="btn btn-primary" (click)="EditCalendar(calendarid)"  data-toggle="modal" data-target="#editCalendar">
                             Edit
                            </button>
 <br/>
@@ -127,7 +128,7 @@ clear
                            [cpCancelButton]="true"
                           [(colorPicker)]="color"/>
              <br/><br/>
-                          <button type="button"   class="btn btn-danger" (click)="DeleteCalendar(calendarid)" >Delete Calendar</button>
+                          <button  type="button"   class="btn btn-danger" (click)="DeleteCalendar(calendarid)"  >Delete Calendar</button>
                         
                         <!-- Modal -->
                         <div class="modal fade" id="createShift" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
