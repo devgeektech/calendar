@@ -39,6 +39,8 @@ export class FullCalendarComponent implements OnInit {
 show:boolean=false;
 calendarid:string="";
  EditCalendarResult:any;
+//  ----
+statusCode:number;
 calendarOptions: Options;
 displayEvent: any;
 events = null;
@@ -261,23 +263,36 @@ public EditCalendar(calendarid: string)
        }
     );
 }
-public DeleteCalendar(calendarid: string)
- {
-   console.log("Delete Id",calendarid);
-   this._calendarService.deleteCalendar(calendarid).subscribe(
-    data => {
-      // refresh the list
-      this.getScheduleCalendar();
-      //return true;
-    },
-    error => {
-      console.error("Error saving New Calendar!");
-     // return Observable.throw(error);
-     });
+// ----Delete Calendar----//
+DeleteCalendar(calendarid) {
 
+  this._calendarService.deleteCalendar(calendarid)
+    .subscribe(successCode => {
+  //this.statusCode = successCode;
+    //Expecting success code 204 from server
+  this.statusCode = 204;
+  this.getScheduleCalendar();
+  return true;
+},
+errorCode => this.statusCode = errorCode);    
 
  }
+// public DeleteCalendar(calendarid: string)
+//  {
+//    console.log("Delete Id",calendarid);
+//    this._calendarService.deleteCalendar(calendarid).subscribe(
+//     data => {
+//       // refresh the list
+//       this.getScheduleCalendar();
+//       //return true;
+//     },
+//     error => {
+//       console.error("Error saving New Calendar!");
+//      // return Observable.throw(error);
+//      });
+
+    }
+  
 
  
 
-}

@@ -83,22 +83,43 @@ export class CalendarService {
 
     return this.http.put(serverUrl, body, options ).map((res: Response) => res.json());
   }
-  deleteCalendar(id) {
-    let serverUrl = apiBaseUrlServer + '/scheduling/calendar/' +id;
-    let headers = new Headers({ 'Content-Type': 'application/json' });
-    let token='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjU5NWE1NThkYmNjMDcwNTJhOTgzMjkwNiIsImlhdCI6MTUyNjAyMDU4MSwiZXhwIjoxNTI4NjEyNTgxfQ._IsAwWCUu3wbl3jiX05VnC2qGE1AEHyAWk221dMYUeA'
+  // deleteCalendar(calendarid) {
+  //   let serverUrl = apiBaseUrlServer + '/scheduling/calendar/' +calendarid;
+  //   let headers = new Headers({ 'Content-Type': 'application/json' });
+  //   let token='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjU5NWE1NThkYmNjMDcwNTJhOTgzMjkwNiIsImlhdCI6MTUyNjAyMDU4MSwiZXhwIjoxNTI4NjEyNTgxfQ._IsAwWCUu3wbl3jiX05VnC2qGE1AEHyAWk221dMYUeA'
     
-    headers.append('Authorization',' '+token);
-    
-
-    
-   let options = new RequestOptions({ headers: headers });
-    
-   //let body = id;
+  //   headers.append('Authorization',' '+token);
     
 
-   return this.http.delete(serverUrl,options);
+    
+  //  let options = new RequestOptions({ headers: headers });
+    
+  //  //let body = id;
+    
+
+  //  return this.http.delete(this.apiBaseUrlServer +"/"+ calendarid)
+  //  .map(success => success.status)
+  //        .catch(this.handleError);  }
+  
+  deleteCalendar(calendarid){
+  let serverUrl = apiBaseUrlServer + '/scheduling/calendar/';
+  let headers = new Headers({ 'Content-Type': 'application/json' });
+  let token='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjU5NWE1NThkYmNjMDcwNTJhOTgzMjkwNiIsImlhdCI6MTUyNjAyMDU4MSwiZXhwIjoxNTI4NjEyNTgxfQ._IsAwWCUu3wbl3jiX05VnC2qGE1AEHyAWk221dMYUeA'
+  headers.append('Authorization',' '+token);
+  let data = {
+    "calendarIds":[
+		calendarid
+	]}
+  let options = new RequestOptions({ headers: headers,body:data });
+	return this.http.delete(serverUrl,options)
+	       .map(success => success.status)
+               .catch(this.handleError);
+
   }
-  
-  
+
+
+  private handleError (error: Response | any) {
+    console.error(error.message || error);
+    return Observable.throw(error.status);
+      }
 }
