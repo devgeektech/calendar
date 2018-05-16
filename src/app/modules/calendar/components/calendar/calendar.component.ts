@@ -40,12 +40,14 @@ export class FullCalendarComponent implements OnInit {
 show:boolean=false;
 calendarid:string="";
  EditCalendarResult:any;
+ EditShiftResult:any;
 //  ----
 statusCode:number;
 calendarOptions: Options;
 displayEvent: any;
 events = null;
   public calendarResult: any;
+  public calendarShiftResult:any;
 
   
   @ViewChild(CalendarComponent) ucCalendar: CalendarComponent;
@@ -75,6 +77,7 @@ events = null;
     };
 
     this.getScheduleCalendar()
+    this.getCalendarByFromDateandToDate()
    }
   setClassCalendarName() {
     return { 'has-danger': !this.calendar_name.pristine && !this.calendar_name.valid };
@@ -90,11 +93,14 @@ events = null;
     return { 'has-danger': !this.shift_datetime.pristine && !this.shift_datetime.valid };
   }
 
+  // ----Get Schedule Calendar All List----//
   getScheduleCalendar() {
     
     this._calendarService.getSchedulingCalendar().subscribe(
       data =>   this.calendarResult = data);
   }
+  // ----Get Schedule Calendar All List----
+
   loadevents() {
     this.eventService.getEvents().subscribe(data => {
       this.events = data;
@@ -151,7 +157,7 @@ events = null;
   
   
   
-  //This function is bound to a ModalTwo button.
+  // ----Create Calendar----//
 public clickModalTwo() {
   console.log("Test post onclick");
   console.log("post",this.calendarForm.value);
@@ -195,7 +201,9 @@ public clickModalTwo() {
        }
     );
 }
- 
+ // ----Create Calendar----//
+
+
 public OpenCalendarModel(_id: string) {
   console.log("Selected Id",_id);
 this.calendarid=_id;
@@ -207,7 +215,7 @@ closeCalendarModel() {
   this.show = false;
   
 }
-
+// ----Edit Calendar----//
 public EditCalendar(calendarid: string)
  {
    console.log("Edit Id",calendarid);
@@ -218,6 +226,9 @@ public EditCalendar(calendarid: string)
 
 
  }
+// ----Edit Calendar----//
+
+ // ----Update Calendar----//
  public clickModalTwoEdit() {
   
   console.log("Test Edit onclick",this.calendarid);
@@ -264,6 +275,9 @@ public EditCalendar(calendarid: string)
        }
     );
 }
+// ----Update Calendar----//
+
+
 // ----Delete Calendar----//
 DeleteCalendar(calendarid) {
       
@@ -279,21 +293,342 @@ DeleteCalendar(calendarid) {
 errorCode => this.statusCode = errorCode);    
 
  }
-// public DeleteCalendar(calendarid: string)
-//  {
-//    console.log("Delete Id",calendarid);
-//    this._calendarService.deleteCalendar(calendarid).subscribe(
-//     data => {
-//       // refresh the list
-//       this.getScheduleCalendar();
-//       //return true;
-//     },
-//     error => {
-//       console.error("Error saving New Calendar!");
-//      // return Observable.throw(error);
-//      });
 
+ 
+ // ----Update Calendar Status----//
+ public UpdateCalendarStatus(event) {
+  console.log("Update  Calendar Status",this.calendarid);
+  let calendarData:any
+  if(event.target.checked){
+  
+   calendarData = 
+    { 
+      "status": "true"
     }
+  
+  }
+  else if(!event.target.checked)
+  {
+    calendarData = 
+    { 
+      "status": "false"
+    }
+  
+  }
+  
+    this._calendarService.updateCalendarStatus(this.calendarid,calendarData).subscribe(
+       data => {
+        
+         this.getScheduleCalendar();
+         
+       },
+       error => {
+         console.error("Error updating  Calendar Status!");
+        
+       }
+    );
+  
+}
+// ----Update Calendar Status----//
+
+
+
+
+
+ // ----Get Scheduling  Shift----//
+ getSchedulingShift() {
+    
+  this._calendarService.getSchedulingShift().subscribe(
+    data =>   this.calendarShiftResult = data);
+}
+// ----Get Schedule Calendar Shift----//
+
+
+
+  // ----Create  Shift----//
+  public CreateShift() {
+  // this.calendarid= "5af03f3ff0969f52a0db56e9";
+    console.log("post ",this.shiftForm.value);
+let shiftData = 
+{
+  "name": "test meeting calendar rakesh test",
+ // "name":this.shiftForm.value.shift_name,
+  "details": null,
+  "staffing": [
+      "EMP001",
+      "EMP002",
+      "EMP003"
+  ],
+  "mandatory": [
+      "1",
+      "2"
+  ],
+  "m_accepted": [
+      "1"
+  ],
+  "optional": [],
+  "o_accepted": [],
+  "start_date": new Date(),
+  "start_time": "14:00",
+  "end_date": new Date(),
+  "end_time": "15:00",
+  "recurrence": true,
+  "recType": "daily",
+  "every": "1",
+  "on": {
+      "days": null,
+      "date": null,
+      "order": null,
+      "month": null
+  },
+  "endRec": {
+      "occurance": null,
+      "endbyDate": new Date()
+  },
+  "endRecDate": new Date(),
+  "active": true,
+  "timestamp":new Date()
+}
+   
+  this._calendarService.createNewShift(shiftData).subscribe(
+         data => {
+           // refresh the list
+           this.getSchedulingShift();
+           //return true;
+         },
+         error => {
+           console.error("Error saving New Calendar!");
+          // return Observable.throw(error);
+         }
+      );
+  }
+   // ----Create  Shift----//
+
+//---Edit Shift buy shiftid 
+// ----Edit Calendar----//
+public Edit(shiftid: string)
+ {
+   console.log("Edit Id",shiftid);
+   this._calendarService.getSchedulingShift_Shiftid(shiftid).subscribe(
+    data =>  { this.EditShiftResult = data[0]
+    console.log("Edit data",this.EditCalendarResult)
+    });
+
+
+ }
+
+
+
+
+ // ----Update  Shift----//
+   public UpdateShift() {
+    
+    console.log("Test Edit onclick",this.calendarid);
+    console.log("post",this.shiftForm.value);
+    let shiftData = 
+    {
+      "_id": "",
+      "name": "test meeting calendar rakesh test",
+      "details": null,
+      "staffing": [
+          "EMP001",
+          "EMP002",
+          "EMP003"
+      ],
+      "mandatory": [
+          "1",
+          "2"
+      ],
+      "m_accepted": [
+          "1"
+      ],
+      "optional": [],
+      "o_accepted": [],
+      "start_date": "2018-05-07T00:00:00.000Z",
+      "start_time": "14:00",
+      "end_date": "2018-05-07T00:00:00.000Z",
+      "end_time": "15:00",
+      "recurrence": true,
+      "recType": "daily",
+      "every": "1",
+      "on": {
+          "days": null,
+          "date": null,
+          "order": null,
+          "month": null
+      },
+      "endRec": {
+          "occurance": null,
+          "endbyDate": "2018-06-30T00:00:00.000Z"
+      },
+      "endRecDate": "2018-06-30T00:00:00.000Z",
+      "active": true,
+      "timestamp": "2018-05-07T11:21:29.257Z"
+    }
+    
+      this._calendarService.updateSchedulingShift(shiftData).subscribe(
+         data => {
+          
+           this.getSchedulingShift();
+        
+         },
+         error => {
+           console.error("Error saving New Calendar!");
+          // return Observable.throw(error);
+         }
+      );
+  }
+  // ----Update  Shift----//
+
+
+// ----Delete Scheduling  Shift----//
+DeleteShift(shiftid) {
+  
+  this._calendarService.deleteSchedulingShift(shiftid)
+    .subscribe(successCode => {
+  //this.statusCode = successCode;
+    //Expecting success code 204 from server
+  this.statusCode = 204;
+  this.getSchedulingShift();
+  this.show= false;
+  return true;
+},
+errorCode => this.statusCode = errorCode);    
+
+ }
+ //--delete scheduling shifts---------------
+
+//-------------------Create Calendar Shift
+public CreateCalendarShift() {
+  console.log("Test post onclick");
+  //console.log("post",this.calendarForm.value);
+  let calendarshiftData = 
+  {
+    "calendarId":"5af03f3ff0969f52a0db56e9",
+    "externalId":"ex1235",
+    "name":"Calendar calendar",
+    "schedules":[
+      "s005",
+      "s006"
+    ],
+    "active":"false",
+    "emailNotificationList":[
+      "kuppal@aadhya-analytics.com",
+      "raheem@aadhya-analytics.com",
+      "sunil@aadhya-analytics.com"
+      ],
+    "emailNotificationEnabled":"false",
+    "createdDate":"1522520474547",
+    "createdDateString":"31-03-2018",
+    "createdId":"emp0001",
+    "createdName":"konark",
+    "lastModifiedDate":"1522520474547",
+    "lastModifiedDateString":"31-03-2018",
+    "lastModifiedId":"emp0001",
+    "lastModifiedName":"konark",
+    "accountId":"acc1001",
+    "status":"1",
+    "resourceBundleId":"RSB005",
+    "orgId":"001"
+  }
+
+  this._calendarService.createNewCalendarShift(calendarshiftData).subscribe(
+    data => {
+      // refresh the list
+      this.getCalendarShift();
+      //return true;
+    },
+    error => {
+      console.error("Error saving New Calendar!");
+     // return Observable.throw(error);
+    }
+ );
+}
+//create calendar shift//
+
+
+ // ----Get Calendar  Shift----//
+ getCalendarShift() {
+    
+  this._calendarService.getCalendarShift(this.calendarid).subscribe(
+    data =>   this.calendarShiftResult = data);
+}
+// ----Get  Calendar Shift----//
+
+//------update Calendar Shift
+public UpdateCalendarShift() {
+  console.log("Test post onclick");
+  //console.log("post",this.calendarForm.value);
+  let calendarshiftData = 
+  {
+    "calendarId":"5af03f3ff0969f52a0db56e9",
+    "externalId":"ex1235",
+    "name":"Calendar calendar",
+    "schedules":[
+      "s005",
+      "s006"
+    ],
+    "active":"false",
+    "emailNotificationList":[
+      "kuppal@aadhya-analytics.com",
+      "raheem@aadhya-analytics.com",
+      "sunil@aadhya-analytics.com"
+      ],
+    "emailNotificationEnabled":"false",
+    "createdDate":"1522520474547",
+    "createdDateString":"31-03-2018",
+    "createdId":"emp0001",
+    "createdName":"konark",
+    "lastModifiedDate":"1522520474547",
+    "lastModifiedDateString":"31-03-2018",
+    "lastModifiedId":"emp0001",
+    "lastModifiedName":"konark",
+    "accountId":"acc1001",
+    "status":"1",
+    "resourceBundleId":"RSB005",
+    "orgId":"001"
+  }
+
+  this._calendarService.updateCalendarShift(calendarshiftData).subscribe(
+    data => {
+      // refresh the list
+      this.getCalendarShift();
+      //return true;
+    },
+    error => {
+      console.error("Error saving New Calendar!");
+     // return Observable.throw(error);
+    }
+ );
+}
+//------update Calendar Shift
+
+
+// ----Get calendar  Shift AdditionalInfo ----//
+getCalendarShiftAdditionalInfo() {
+    
+  this._calendarService.getAdditionalDetailsbycalendarId(this.calendarid).subscribe(
+    data =>   this.calendarShiftResult = data);
+}
+// ----Get calendar  Shift AdditionalInfo ----//
+
+getCalendarByFromDateandToDate()
+{
+  let calendarshiftData = 
+  {
+    "calendarid":"5af03f3ff0969f52a0db56e9",
+    "fromdt":'2017-10-15',
+    "todt":'2017-10-21'
+  }
+  this._calendarService.getCalendarByFromDateandToDate(calendarshiftData).subscribe(
+    data =>   this.calendarShiftResult = data);
+
+}
+
+
+
+  
+}
   
 
  
