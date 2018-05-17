@@ -38,14 +38,14 @@ clear
                     <div class="modal-body">
                             <form   [formGroup]="calendarForm" (ngSubmit)="createCalendarTest(calendarForm)">
                                     <div class="form-group" [ngClass]="setClassCalendarName()">
-                                      <!--<label for="recipient-name" class="col-form-label">Calendar Name:</label>-->
+                                    <!--<label for="recipient-name" class="col-form-label">Calendar Name:</label>-->
                                     
                                      
                                         <input type="text" class="form-control"   name="calendar_name" formControlName="calendar_name" placeholder="Calendar Name">
                                     
                                     </div>
                                     <div class="form-group" [ngClass]="setClassReportTo()">
-                                     <!-- <label for="message-text" class="col-form-label">Report To:</label>-->
+                                     <!--<label for="message-text" class="col-form-label">Report To:</label>-->
                                       <textarea class="form-control" name="report_to" formControlName="report_to" placeholder="Report To"></textarea>
                                     </div>
                                   </form>
@@ -113,7 +113,7 @@ clear
         
               <div *ngIf="show" style="float:right!important;position: relative;border: 2px solid lightgrey;padding: 10px;border-radius: 5px;">
         
-                  <i class="fa fa-times deal-report-cross" aria-hidden="true" (click)="closeCalendarModel()"></i>
+                  <i class="fa fa-times deal-report-cross" style="cursor: pointer"  aria-hidden="true" (click)="closeCalendarModel()"></i>
                   <div class="deal-text"> 
                       <button type="button" class="btn btn-primary"  data-toggle="modal" data-target="#createShift">
                          Add Shift
@@ -121,13 +121,14 @@ clear
                         <button  type="button" class="btn btn-primary" (click)="EditCalendar(calendarid)"  data-toggle="modal" data-target="#editCalendar">
                             Edit
                            </button>
-<br/>
-Status: <input type="checkbox" (change)="UpdateCalendarStatus($event)"><br/>
-
-                           <input [value]="color"
-                           [style.background]="color"
+<br/><br/>
+Status: <ui-switch (change)="UpdateCalendarStatus($event)" size="small"  checked></ui-switch><br/>
+<!--reverse-->
+Calendar Code:  <input  [value]="color"
+                           [style.background]="color" 
                            [cpCancelButton]="true"
-                          [(colorPicker)]="color"/>
+                          [(colorPicker)]="color">
+                          
              <br/><br/>
                           <button  type="button"   class="btn btn-danger" (click)="DeleteCalendar(calendarid)"  >Delete Calendar</button>
                         
@@ -152,7 +153,10 @@ Status: <input type="checkbox" (change)="UpdateCalendarStatus($event)"><br/>
                                               </div>
                                               <div class="form-group" [ngClass]="setClassShiftDateTime()"> 
                                                <!-- <label for="message-text" class="col-form-label">Report To:</label>-->
-                                                <input class="form-control" name="shift_datetime" formControlName="shift_datetime" placeholder="Shift Date Time" required>
+                                                <input class="form-control" [owlDateTime]="dt1" [owlDateTimeTrigger]="dt1" name="shift_datetime" formControlName="shift_datetime" placeholder="Shift Date Time" required>
+                                                
+                                                <owl-date-time #dt1></owl-date-time>
+                                                
                                               </div>
                                             </form>
                                     

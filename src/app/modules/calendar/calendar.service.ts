@@ -275,8 +275,9 @@ getCalendarShift(calendarid)  {
 //-----Get Calendar All Shift-------//
 
 //------add a schedule to calendar   Create Calendar Shift-------//
-createNewCalendarShift(shift) {
-  let serverUrl = apiBaseUrlServer + '/scheduling/calendar/' + shift.calendarid + '/shift';
+createNewCalendarShift(calendarid,shift) {
+  console.log(shift);
+  let serverUrl = apiBaseUrlServer + '/scheduling/calendar/' + calendarid + '/shift';
   let headers = new Headers({ 'Content-Type': 'application/json' });
   let token='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjU5NWE1NThkYmNjMDcwNTJhOTgzMjkwNiIsImlhdCI6MTUyNjAyMDU4MSwiZXhwIjoxNTI4NjEyNTgxfQ._IsAwWCUu3wbl3jiX05VnC2qGE1AEHyAWk221dMYUeA'
   

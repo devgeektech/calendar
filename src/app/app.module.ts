@@ -21,7 +21,8 @@ import { FullCalendarComponent } from './modules/calendar/components/calendar/ca
 import { DatePickerComponent } from './modules/calendar/components/date-picker/date-picker.component';
 import { DatePickerDirective } from './modules/calendar/components/date-picker/date-picker.directive';
 import { ColorPickerModule } from 'ngx-color-picker';
- 
+import { UiSwitchModule } from 'angular2-ui-switch';
+import { OwlDateTimeModule, OwlNativeDateTimeModule } from 'ng-pick-datetime';
 
 @NgModule({
   declarations: [
@@ -33,6 +34,7 @@ import { ColorPickerModule } from 'ngx-color-picker';
     FullCalendarComponent,
     DatePickerComponent,
     DatePickerDirective
+    
   ],
   imports: [
     BrowserModule,
@@ -43,7 +45,11 @@ import { ColorPickerModule } from 'ngx-color-picker';
     BrowserAnimationsModule,
     FullCalendarModule,
     
-    ColorPickerModule
+    ColorPickerModule,
+    UiSwitchModule,
+    OwlDateTimeModule, 
+    OwlNativeDateTimeModule,
+ 
   ],
   providers: [services,EventService],
   bootstrap: [AppComponent]
