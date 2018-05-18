@@ -39,6 +39,7 @@ export class FullCalendarComponent implements OnInit {
   ]);
   
 show:boolean=false;
+
 calendarid:string="";
  EditCalendarResult:any;
  EditShiftResult:any;
@@ -50,6 +51,8 @@ events = null;
   public calendarResult: any;
   public calendarShiftResult:any;
   private color: string = "#0299e5";
+  private status:string="InActive";
+  isChecked:boolean=false;
   
   @ViewChild(CalendarComponent) ucCalendar: CalendarComponent;
   constructor(protected formBuilder: FormBuilder,protected eventService: EventService,protected router: Router,protected _calendarService:CalendarService) { }
@@ -212,11 +215,39 @@ this._calendarService.createNewCalendar(calendarData).subscribe(
 public OpenCalendarModel(_id: string) {
   console.log("Selected Id",_id);
 this.calendarid=_id;
+
+this._calendarService.getSchedulingCalendarByCalendarID(this.calendarid).subscribe(
+  data =>  { this.EditCalendarResult = data[0]
+  console.log("Edit data",this.EditCalendarResult)
+  if(this.EditCalendarResult.active=='0')
+  {
+    console.log("onclick InActive")
+    this.status="InActive";
+    this.isChecked=false;
+  }
+  else if(this.EditCalendarResult.active=='1')
+  {
+    console.log("onclick Active")
+    this.status="Active";
+    this.isChecked=true;
+  }
+  
+  });
+
+  
+  
   this.show = true;
- }
+  }
+
+
+
+  
 
 closeCalendarModel() {
+  this.status="InActive";
+  this.isChecked=false;
   this.show = false;
+
 }
 // ----Edit Calendar----//
 public EditCalendar(calendarid: string)
@@ -225,6 +256,7 @@ public EditCalendar(calendarid: string)
    this._calendarService.getSchedulingCalendarByCalendarID(calendarid).subscribe(
     data =>  { this.EditCalendarResult = data[0]
     console.log("Edit data",this.EditCalendarResult)
+    
     });
   }
 // ----Edit Calendar----//
@@ -313,7 +345,23 @@ errorCode => this.statusCode = errorCode);
   }
   this._calendarService.updateCalendarStatus(this.calendarid,calendarData).subscribe(
        data => {
-        this.getScheduleCalendar();
+       // this.getScheduleCalendar();
+       this._calendarService.getSchedulingCalendarByCalendarID(this.calendarid).subscribe(
+        data =>  { this.EditCalendarResult = data[0]
+        console.log("Edit data",this.EditCalendarResult)
+        if(this.EditCalendarResult.active=='0')
+        {
+          this.status="InActive";
+          this.isChecked=false;
+        }
+        else if(this.EditCalendarResult.active=='1')
+        {
+          this.status="Active";
+          this.isChecked=true;
+        }
+        
+        });
+    
          },
        error => {
          console.error("Error updating  Calendar Status!");
@@ -568,6 +616,10 @@ getCalendarByFromDateandToDate()
   }
   this._calendarService.getCalendarByFromDateandToDate(calendarshiftData).subscribe(
     data =>   this.calendarShiftResult = data);
+}
+CalendarColorCodeChange(calendarColorCode : string ) {
+  
+  console.log(this.calendarid,calendarColorCode);
 }
 }
   

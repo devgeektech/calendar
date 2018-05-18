@@ -14,7 +14,7 @@ clear
 
     
            
-<div  class="col-lg-6 col-md-6 col-sm-9 col-xs-9" style="padding: 10px" align="right">
+<div  class="col-lg-6 col-md-6 col-sm-9 col-xs-9" style="padding: 10px" align="center">
         
 
         <span>Calendars</span>
@@ -60,15 +60,17 @@ clear
                 </div>
               </div>
       
-              <div *ngFor="let result of calendarResult">
-              <!--<div class="squaredThree">-->
-                
-                    <input type="checkbox"   name="optionsRadios" id="checkOther" value="other">
-                    <label for="checkOther"> </label><a (click)="OpenCalendarModel(result._id)" title="more">{{ result.name}}</a>
-                   
+              <div *ngFor="let result of calendarResult;let i = index">
+             
+                  <label class="containermiddle">
+                      <input type="checkbox">
+                      <span class="checkmark"></span>
+                    </label>
+                    <a (click)="OpenCalendarModel(result._id)" title="more">{{ result.name}}</a>
+                    
                     <br/>
                                                      
-               <!-- </div>-->
+               
                  
                    
               </div>
@@ -113,24 +115,103 @@ clear
         
               <div *ngIf="show" style="float:right!important;position: relative;border: 2px solid lightgrey;padding: 10px;border-radius: 5px;">
         
-                  <i class="fa fa-times deal-report-cross" style="cursor: pointer"  aria-hidden="true" (click)="closeCalendarModel()"></i>
+
                   <div class="deal-text"> 
-                      <button type="button" class="btn btn-primary"  data-toggle="modal" data-target="#createShift">
-                         Add Shift
-                        </button>  <br/><br/>
-                        <button  type="button" class="btn btn-primary" (click)="EditCalendar(calendarid)"  data-toggle="modal" data-target="#editCalendar">
-                            Edit
-                           </button>
-<br/><br/>
-Status: <ui-switch (change)="UpdateCalendarStatus($event)" size="small"  checked></ui-switch><br/>
-<!--reverse-->
-Calendar Code:  <input  [value]="color"
-                           [style.background]="color" 
-                           [cpCancelButton]="true"
-                          [(colorPicker)]="color">
-                          
-             <br/><br/>
-                          <button  type="button"   class="btn btn-danger" (click)="DeleteCalendar(calendarid)"  >Delete Calendar</button>
+
+                          <div class="row">
+                              
+                            <div class="col-md-12 col-sm-12">
+                                <div class="form-group">
+                                    <div class="col-md-8" align="left">
+                                      <h3>Calendar Details </h3>
+                                  </div>
+                                    <div class="col-md-4" align="right">
+                                <i class="fa fa-times deal-report-cross" style="cursor: pointer;text-align: right;"  aria-hidden="true" (click)="closeCalendarModel()"></i>
+                                    </div>
+                                </div><br/>
+                                <div class="form-group">
+                                    <div class="col-md-5" align="left">
+                                  
+
+                                    <button type="button" class="btn btn-primary"  data-toggle="modal" data-target="#createShift">
+                                        Add Shift
+                                       </button>
+                                      </div>
+                                  <div class="col-md-7">
+                                  
+                                  </div>
+                                </div>
+                                <div class="clear"></div>
+                                <br/>
+                      
+                                <div class="form-group">
+                                    <div class="col-md-5" align="left">
+                                  
+                                     
+                                    <button  type="button" class="btn btn-primary" (click)="EditCalendar(calendarid)"  data-toggle="modal" data-target="#editCalendar">
+                                        Edit
+                                       </button>
+                                    </div>
+                                       <div class="col-md-7">
+                                  
+                                        </div>
+                                </div>
+                                <br/>
+                                <div class="clear"></div>
+                                <div class="form-group">
+                                    <div class="col-md-5" align="left"> 
+                                     Status:
+                                    </div>
+                                  <div class="col-md-7" align="left">
+                                      <ui-switch  [checked]="isChecked"   (change)="UpdateCalendarStatus($event)" size="small"  ></ui-switch>
+                                                     <span style="margin-left:25px;vertical-align:top;"> {{status}}</span>
+                                  </div>
+                                </div>
+                                <br/>
+                                <div class="clear"></div>
+                                <div class="form-group">
+                                    <div class="col-md-5" align="left">
+                                    Calendar Code: 
+                                    </div>
+                                  <div class="col-md-7" align="left">
+                                      <input type="text" name="calendarcode"     [value]="color" [style.background]="color" 
+                                      [cpPresetColors]="['#fff', '#000', '#2889e9', '#e920e9', '#fff500', 'rgb(236,64,64)']"
+                                     [(colorPicker)]="color" ><br/><br/>
+           
+                                     <button  type="button"   class="btn btn-primary" (click)="CalendarColorCodeChange(color)">Update Calendar Code</button>
+           
+                                  </div>
+                                </div>
+                            <div class="form-group">
+                                <div class="col-md-5" align="left">
+                                    <button  type="button"   class="btn btn-danger" (click)="DeleteCalendar(calendarid)"  >Delete Calendar</button>
+                                    </div>
+                                    <div class="col-md-7">
+                               
+                              </div>
+
+                              </div>
+                      
+                                
+                            
+                            </div>
+                          </div>
+                      
+
+
+
+                       
+                        
+
+        
+
+
+
+
+
+
+            
+
                         
                         <!-- Modal -->
                         <div class="modal fade" id="createShift" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
