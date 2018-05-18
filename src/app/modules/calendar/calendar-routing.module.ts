@@ -1,12 +1,12 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { FullCalendarComponent } from './components/calendar/calendar.component';
+import { CalendarComponent } from './components/calendar/calendar.component';
 
 const routes: Routes = [
 	{
-		path: 'calendar',
-		component: FullCalendarComponent
-	
+		path: '',
+		component: CalendarComponent,
+		pathMatch: 'full'
 	}
 ];
 

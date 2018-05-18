@@ -1,179 +1,180 @@
+<div class="main-container">
+  <div class="container">
+    <h2 class="text-uppercase">Calendar</h2>
+    <div class="col-md-3 col-sm-12 col-lg-3 red-border">
+      <div class="datepicker datepicker-inline">
+        <div class="datepicker-days" style="display: block;">
+          <table class=" table-condensed">
+            <thead>
+              <tr>
+                <th colspan="5" class="switch">August 2018</th>
+                <th class="prev" style="visibility: visible;">
+                  &#10094;
+                </th>
+                <th class="next" style="visibility: visible;">
+                  &#10095;
+                </th>
+              </tr>
+              <tr>
+                <th class="dow">S</th>
+                <th class="dow">M</th>
+                <th class="dow">T</th>
+                <th class="dow">W</th>
+                <th class="dow">T</th>
+                <th class="dow">F</th>
+                <th class="dow">S</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="day old">29</td>
+                <td class="day old">30</td>
+                <td class="day old">31</td>
+                <td class="day">1</td>
+                <td class="day">2</td>
+                <td class="day">3</td>
+                <td class="day">4</td>
+              </tr>
+              <tr>
+                <td class="day">5</td>
+                <td class="day">6</td>
+                <td class="day">7</td>
+                <td class="day">8</td>
+                <td class="day">9</td>
+                <td class="day">10</td>
+                <td class="day">11</td>
+              </tr>
+              <tr>
+                <td class="day active">12</td>
+                <td class="day">13</td>
+                <td class="day">14</td>
+                <td class="day">15</td>
+                <td class="day">16</td>
+                <td class="day">17</td>
+                <td class="day">18</td>
+              </tr>
+              <tr>
+                <td class="day">19</td>
+                <td class="day">20</td>
+                <td class="day">21</td>
+                <td class="day">22</td>
+                <td class="day">23</td>
+                <td class="day">24</td>
+                <td class="day">25</td>
+              </tr>
+              <tr>
+                <td class="day">26</td>
+                <td class="day">27</td>
+                <td class="day">28</td>
+                <td class="day">29</td>
+                <td class="day new">1</td>
+                <td class="day new">2</td>
+                <td class="day new">3</td>
+              </tr>
+              <tr>
+                <td class="day new">4</td>
+                <td class="day new">5</td>
+                <td class="day new">6</td>
+                <td class="day new">7</td>
+                <td class="day new">8</td>
+                <td class="day new">9</td>
+                <td class="day new">10</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <!-- TimeZone: -->
+      <div class="line">
 
-{{show}}
+      </div>
+      <div class="calendar-timezone">
+        <i class="fas fa-globe"></i>
+        <span>Timezone:Newyork</span>
+      </div>
 
-<div><app-date-picker></app-date-picker></div>
-<div class="header1">
-<a (click)="loadevents()"> loadevents</a>
-<button (click)="addEvent()">add Event</button>
-<p>Display event : {{displayEvent | json}}</p></div>
-<div *ngIf="calendarOptions">
-    <ng-fullcalendar #ucCalendar [options]="calendarOptions" (eventClick)="eventClick($event.detail)" (eventDrop)="updateEvent($event.detail)"
-        (eventResize)="updateEvent($event.detail)" (dayClick)="dayClick($event.detail)" (clickButton)="clickButton($event.detail)" [(eventsModel)]="events"></ng-fullcalendar>
-</div>
-clear
+      <!-- calendar -->
 
-    
-           
-<div  class="col-lg-6 col-md-6 col-sm-9 col-xs-9" style="padding: 10px" align="right">
-        
+      <div class="calendar-plus-icon">
+        <h3 pull="left">Calendars
+          <span>
+            <button class="btn-plus-popup">
+              <i class="fas fa-plus" data-toggle="modal" data-target="#createCalendar" pull="right"></i>
+            </button>
+          </span>
+        </h3>
+        <div class="modal fade" id="createCalendar" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
 
-        <span>Calendars</span>
-        
-        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#createCalendar">
-                <i class="fa fa-plus" aria-hidden="true"></i>
-              </button>
-              
-              <!-- Modal -->
-              <div class="modal fade" id="createCalendar" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div class="modal-dialog" role="document">
-                  <div class="modal-content">
-                    <div class="modal-header">
-                    
-                      <h4 class="modal-title" id="exampleModalLabel">New Calendar</h4>
-                      
-                      <button type="button" class="close" align="right" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                      </button>
-                    </div>
-                    <div class="modal-body">
-                            <form   [formGroup]="calendarForm" (ngSubmit)="createCalendarTest(calendarForm)">
-                                    <div class="form-group" [ngClass]="setClassCalendarName()">
-                                      <!--<label for="recipient-name" class="col-form-label">Calendar Name:</label>-->
-                                    
-                                     
-                                        <input type="text" class="form-control"   name="calendar_name" formControlName="calendar_name" placeholder="Calendar Name">
-                                    
-                                    </div>
-                                    <div class="form-group" [ngClass]="setClassReportTo()">
-                                     <!-- <label for="message-text" class="col-form-label">Report To:</label>-->
-                                      <textarea class="form-control" name="report_to" formControlName="report_to" placeholder="Report To"></textarea>
-                                    </div>
-                                  </form>
-                          
-                            
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="close"></button>
-                      <button type="button" [disabled]="!calendarForm.valid"  class="btn btn-primary" (click)="clickModalTwo(calendarForm)" data-dismiss="modal">Create Calendar</button>
-                    </div>
-                  </div>
-                </div>
+                <h4 class="modal-title" id="exampleModalLabel">New Calendar</h4>
+
+                <button type="button" class="close" align="right" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
               </div>
-      
-              <div *ngFor="let result of calendarResult">
-              <!--<div class="squaredThree">-->
-                
-                    <input type="checkbox"   name="optionsRadios" id="checkOther" value="other">
-                    <label for="checkOther"> </label><a (click)="OpenCalendarModel(result._id)" title="more">{{ result.name}}</a>
-                   
-                    <br/>
-                                                     
-               <!-- </div>-->
-                 
-                   
+              <div class="modal-body">
+                <!-- <form
+                  [formGroup]="calendarForm" (ngSubmit)="createCalendarTest(calendarForm)"> 
+                  <div class="form-group" [ngClass]="setClassCalendarName()">
+                    <label for="recipient-name" class="col-form-label">Calendar Name:</label>
+
+
+                    <input type="text" class="form-control" name="calendar_name" formControlName="calendar_name" placeholder="Calendar Name">
+
+                  </div>
+                  <div class="form-group" [ngClass]="setClassReportTo()">
+                    <label for="message-text" class="col-form-label">Report To:</label>
+                    <textarea class="form-control" name="report_to" formControlName="report_to" placeholder="Report To"></textarea>
+                  </div>
+                </form> -->
+
+
               </div>
-               <!-- Modal -->
-               <div class="modal fade" id="editCalendar" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                  <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                      <div class="modal-header">
-                      
-                        <h4 class="modal-title" id="exampleModalLabel">Edit Calendar</h4>
-                        
-                        <button type="button" class="close" align="right" data-dismiss="modal" aria-label="Close">
-                          <span aria-hidden="true">&times;</span>
-                        </button>
-                      </div>
-                      <div class="modal-body">
-                              <form   [formGroup]="calendarForm" (ngSubmit)="editCalendarTest(calendarForm)">
-                                      <div class="form-group" [ngClass]="setClassCalendarName()">
-                                        <!--<label for="recipient-name" class="col-form-label">Calendar Name:</label>-->
-                                      
-                                       
-                                       
-                                      
-                                          <input type="text" class="form-control" [ngModel]="EditCalendarResult?.name"     name="calendar_name" formControlName="calendar_name" placeholder="Calendar Name">
-                                      
-                                      </div>
-                                      <div class="form-group" [ngClass]="setClassReportTo()">
-                                       <!-- <label for="message-text" class="col-form-label">Report To:</label>-->
-                                        <textarea class="form-control" name="report_to" [ngModel]="EditCalendarResult?.emailNotificationList" formControlName="report_to" placeholder="Report To"></textarea>
-                                      </div>
-                                    </form>
-                            
-                              
-                      </div>
-                      <div class="modal-footer">
-                          <button type="button" class="close"></button>
-                        <button type="button" [disabled]="!calendarForm.valid"  class="btn btn-primary" (click)="clickModalTwoEdit(calendarForm)" data-dismiss="modal">Edit Calendar</button>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-        
-              <div *ngIf="show" style="float:right!important;position: relative;border: 2px solid lightgrey;padding: 10px;border-radius: 5px;">
-        
-                  <i class="fa fa-times deal-report-cross" aria-hidden="true" (click)="closeCalendarModel()"></i>
-                  <div class="deal-text"> 
-                      <button type="button" class="btn btn-primary"  data-toggle="modal" data-target="#createShift">
-                         Add Shift
-                        </button>  <br/><br/>
-                        <button  type="button" class="btn btn-primary" (click)="EditCalendar(calendarid)"  data-toggle="modal" data-target="#editCalendar">
-                            Edit
-                           </button>
-<br/>
+              <div class="modal-footer">
 
-                           <input [value]="color"
-                           [style.background]="color"
-                           [cpCancelButton]="true"
-                          [(colorPicker)]="color"/>
-             <br/><br/>
-                          <button  type="button"   class="btn btn-danger" (click)="DeleteCalendar(calendarid)"  >Delete Calendar</button>
-                        
-                        <!-- Modal -->
-                        <div class="modal fade" id="createShift" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                          <div class="modal-dialog" role="document">
-                            <div class="modal-content">
-                              <div class="modal-header">
-                                <h4 class="modal-title" id="exampleModalLabel">New Shift</h4>
-                                <button type="button" class="close" align="right" data-dismiss="modal" aria-label="Close">
-                                  <span aria-hidden="true">&times;</span>
-                                </button>
-                              </div>
-                              <div class="modal-body">
-                                      <form [formGroup]="shiftForm" (ngSubmit)="createShiftTest(shiftForm)">
-                                              <div class="form-group" [ngClass]="setClassShiftName()">
-                                                <!--<label for="recipient-name" class="col-form-label">Calendar Name:</label>-->
-                                                
-                                               
-                                                  <input type="text" class="form-control" name="shift_name" formControlName="shift_name" placeholder="Shift Name" required>
-                                              
-                                              </div>
-                                              <div class="form-group" [ngClass]="setClassShiftDateTime()"> 
-                                               <!-- <label for="message-text" class="col-form-label">Report To:</label>-->
-                                                <input class="form-control" name="shift_datetime" formControlName="shift_datetime" placeholder="Shift Date Time" required>
-                                              </div>
-                                            </form>
-                                    
-                                      
-                              </div>
-                              <div class="modal-footer">
-                                  <button type="button" class="close"></button>
-                                <button type="button" [disabled]="!shiftForm.valid"  class="btn btn-primary" (click)="clickModalShift(shiftForm)" data-dismiss="modal">Create Shift</button>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                
-                  </div>
-                </div>
+                <button type="button" [disabled]="!calendarForm.valid" class="btn btn-primary" (click)="clickModalTwo(calendarForm)" data-dismiss="modal">Create Calendar</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="line"></div>
+      <div class="calendar-text">
+        <p> There are no calendars Please create a calendar by Clicking on '+' icon above.
+        </p>
+      </div>
 
-    
-    
-        
+      <!-- List View -->
+   
+        <div class="line">
+
+        </div>
+
+
+      <div class="row list-container">
+      <ul class="calendar-list">
+        <!--<div class="squaredThree">-->
+        <li *ngFor="let result of calendarResult">
+            
+
+          <a (click)="OpenCalendarModel(result._id)" title="more">
+           <input type="checkbox" name="optionsRadios" id="checkOther" class="checkmark" value="other">
+       <span ><label for="checkOther"> </label>{{ result.name}}
+        </span>
+        <i class="three-dots fas fa-ellipsis-v pull-right"></i>
+      </a>
       
-    
+
+        </li>
+        <!-- </div>-->
+      </ul>
+    </div>
+    <div class="col-md-9 col-sm-12 col-lg-9 red-border">
+
+    </div>
+
+  </div>
 
 </div>
-
-<router-outlet></router-outlet>

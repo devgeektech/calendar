@@ -1,7 +1,6 @@
 @import url(https://fonts.googleapis.com/css?family=Open+Sans:100,400,300,500,600,700);
 @import url(https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700);
 @import "~ng-pick-datetime/assets/style/picker.min.css";
-@import "~fullcalendar/dist/fullcalendar.min.css";
 
 .cdk-overlay-container {
   z-index: 12000 !important;
@@ -149,57 +148,7 @@ body {
 .paddingLeft0 {
   padding-left: 0px;
 }
-.fc-scroller.fc-day-grid-container{
-  height:500px;
-}
-/* .fc .fc-toolbar>*>*{
-float:left;
-margin-left:45em;
-margin-top:50px;
-} */
 
- .fc-view>table {
-   position: relative;
-   left:45%;
- /* margin-left:580px !important;
- margin-top:10px; */
- width:700px;
- 
- }
- /* .fc-button-group{
-   margin-left:0px;
-   width:350px;
- 
- } */
-  .fc-left{
-    margin-top:50px;   
-    margin-left:580px;
-  }
-.fc-center {
-  margin-top:50px;
-}
- .fc-right{
-  margin-top:50px;
-  margin-right:9px;
- }
- /* .fc-prev-button{
-position: relative;
-left:580px;}
- 
- 
- .fc-next-button.fc-button {
-   margin-left:580px;
- }
- .fc-today-button.fc-button {
-   margin-left:0px;
-  } 
-
-.fc-state-default.fc-corner-right{
-  margin-right:9px;
-}  */
-body{
-  background-color:#fff;
-}
 .paddingRight0 {
   padding-right: 0px;
 }
@@ -9721,11 +9670,4 @@ table.dataTable.display tbody tr:first-child td {
   position: absolute;
   right: 0px;
   z-index: 2000;
-}
-
-a:hover {
-  cursor: pointer;
- 
-  /*background-image: url('./assets/images/threedots.png');*/
-
 }
