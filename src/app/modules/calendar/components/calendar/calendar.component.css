@@ -72,6 +72,10 @@ width:100%;
 }
 /* Popup */
 
+#createCalendar{
+    padding-right:0px;
+}
+
 .modal-content {
     position: relative;
     display: -webkit-box;
@@ -113,6 +117,16 @@ width:100%;
     text-shadow: 0 1px 0 #fff;
     opacity: .5;
     padding-left: 400px!important;
+}
+
+
+.modal-footer .button{
+ 
+    margin-right:165px;
+}
+.btn1{
+    background-color:rgb(17, 146, 129);
+    color:#fff;
 }
 
 
@@ -160,6 +174,8 @@ margin-left:15px;
     color:rgb(94, 94, 94);
     display: block;
     cursor:default;
+    font-weight:400;
+
     
     background-color:rgb(224, 223, 223);
  } 
