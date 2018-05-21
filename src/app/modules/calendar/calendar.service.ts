@@ -122,7 +122,7 @@ export class CalendarService {
 
 //----Get Scheduling All Shift  get all shifts (schedules) -------// 
 getSchedulingShift()  {
-  let serverUrl = apiBaseUrlServer + '/scheduling/shift';
+  let serverUrl = apiBaseUrlServer + '/scheduling/shifts';
   let headers= new Headers({ 'Content-Type': 'application/json' });
   let token='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjU5NWE1NThkYmNjMDcwNTJhOTgzMjkwNiIsImlhdCI6MTUyNjAyMDU4MSwiZXhwIjoxNTI4NjEyNTgxfQ._IsAwWCUu3wbl3jiX05VnC2qGE1AEHyAWk221dMYUeA'
   headers.append('Authorization',' '+token);
@@ -152,7 +152,7 @@ createNewShift(shift) {
 
 //----Get Scheduling All Shift get a schedule by scheduleId-------// 
 getSchedulingShift_Shiftid(shiftid)  {
-  let serverUrl = apiBaseUrlServer + '/scheduling/shift' + shiftid;
+  let serverUrl = apiBaseUrlServer + '/scheduling/shift/' + shiftid;
   let headers= new Headers({ 'Content-Type': 'application/json' });
   let token='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjU5NWE1NThkYmNjMDcwNTJhOTgzMjkwNiIsImlhdCI6MTUyNjAyMDU4MSwiZXhwIjoxNTI4NjEyNTgxfQ._IsAwWCUu3wbl3jiX05VnC2qGE1AEHyAWk221dMYUeA'
   headers.append('Authorization',' '+token);
@@ -182,9 +182,9 @@ updateSchedulingShift(shift) {
 }
 
 //------Update scheduling Shift-------//
-updateScheduleShift(shift) {
+updateScheduleShift(shiftid,shift) {
   
-  let serverUrl = apiBaseUrlServer + '/scheduling/shift/'+shift._id;
+  let serverUrl = apiBaseUrlServer + '/scheduling/shift/'+shiftid;
   let headers = new Headers({ 'Content-Type': 'application/json' });
   let token='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjU5NWE1NThkYmNjMDcwNTJhOTgzMjkwNiIsImlhdCI6MTUyNjAyMDU4MSwiZXhwIjoxNTI4NjEyNTgxfQ._IsAwWCUu3wbl3jiX05VnC2qGE1AEHyAWk221dMYUeA'
   
@@ -238,14 +238,14 @@ updateScheduleShift(shift) {
 
 //------Delete Scheduling Shift-------//
 
-deleteSchedulingShift(shift){
+deleteSchedulingShift(_id){
   let serverUrl = apiBaseUrlServer + '/scheduling/shift';
   let headers = new Headers({ 'Content-Type': 'application/json' });
   let token='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjU5NWE1NThkYmNjMDcwNTJhOTgzMjkwNiIsImlhdCI6MTUyNjAyMDU4MSwiZXhwIjoxNTI4NjEyNTgxfQ._IsAwWCUu3wbl3jiX05VnC2qGE1AEHyAWk221dMYUeA'
   headers.append('Authorization',' '+token);
 
     let data ={
-      "schedules":"New001"
+      "scheduleId":_id
    }
 
   let options = new RequestOptions({ headers: headers,body:data });

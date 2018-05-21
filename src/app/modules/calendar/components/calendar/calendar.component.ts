@@ -41,6 +41,7 @@ export class FullCalendarComponent implements OnInit {
 show:boolean=false;
 
 calendarid:string="";
+shiftid:string="";
  EditCalendarResult:any;
  EditShiftResult:any;
 //  ----
@@ -50,6 +51,7 @@ displayEvent: any;
 events = null;
   public calendarResult: any;
   public calendarShiftResult:any;
+  public SchedulingShiftResult:any;
   private color: string = "#0299e5";
   private status:string="InActive";
   isChecked:boolean=false;
@@ -82,6 +84,7 @@ events = null;
     };
 
     this.getScheduleCalendar()
+    
     this.getCalendarByFromDateandToDate()
    }
   setClassCalendarName() {
@@ -299,6 +302,7 @@ public EditCalendar(calendarid: string)
        data => {
          // refresh the list
          this.getScheduleCalendar();
+         this.EditCalendarResult="";
          //return true;
        },
        error => {
@@ -384,7 +388,7 @@ errorCode => this.statusCode = errorCode);
     var datePipe = new DatePipe("en-US");
     let sDate = datePipe.transform(this.shiftForm.value.shift_datetime, "short");
     var splitString = sDate.split(',');
-    let shiftDate = datePipe.transform(splitString[0], "dd/MM/yyyy");
+    let shiftDate = datePipe.transform(splitString[0], "yyyy-MM-dd");
   let shiftTime=splitString[1];
   console.log(sDate,shiftDate,shiftTime)
 let shiftData = 
@@ -437,6 +441,11 @@ let shiftData =
      this._calendarService.createNewCalendarShift(this.calendarid
 ,shift).subscribe(
       data => {
+        this.getAllShiftList();
+        this.shiftid="";
+      this.shiftForm.value.shift_name = '';
+      this.shiftForm.value.shift_datetime = '';
+        
        //this.calendarResult = data
         // refresh the list
         //this.getSchedulingShift();
@@ -457,25 +466,30 @@ error => {
    // ----Create  Shift----//
 
 //---Edit Shift buy shiftid 
-// ----Edit Calendar----//
-public Edit(shiftid: string)
+
+ EditShift(_id: string)
  {
-   console.log("Edit Id",shiftid);
-   this._calendarService.getSchedulingShift_Shiftid(shiftid).subscribe(
+   console.log("EditShift Id",_id);
+   this.shiftid=_id;
+   this._calendarService.getSchedulingShift_Shiftid(_id).subscribe(
     data =>  { this.EditShiftResult = data[0]
-    console.log("Edit data",this.EditCalendarResult)
+    console.log("Edit data",this.EditShiftResult)
     });
 }
 
 // ----Update  Shift----//
-   public UpdateShift() 
+   public clickModalShiftEdit() 
    {
-    var datePipe = new DatePipe("en-US");
-    let shiftDate = datePipe.transform(this.shiftForm.value.shift_datetime, 'dd-mm-yyyy');
-  let shiftTime= datePipe.transform(this.shiftForm.value.shift_datetime,"hh:mm");
-  console.log(shiftDate,shiftTime)
-let updateshiftData = 
+     console.log("Shiftid",this.shiftid)
+     var datePipe = new DatePipe("en-US");
+     let sDate = datePipe.transform(this.shiftForm.value.shift_datetime, "short");
+     var splitString = sDate.split(',');
+     let shiftDate = datePipe.transform(splitString[0], "yyyy-MM-dd");
+   let shiftTime=splitString[1];
+   console.log(sDate,shiftDate,shiftTime)
+ let updateshiftData = 
 {
+ // "_id":this.shiftid,
   "name": this.shiftForm.value.shift_name,
  // "name":this.shiftForm.value.shift_name,
   "details": null,
@@ -513,9 +527,12 @@ let updateshiftData =
   "endRecDate": new Date(),
   "active": true
   }
-this._calendarService.updateSchedulingShift(updateshiftData).subscribe(
+this._calendarService.updateScheduleShift(this.shiftid,updateshiftData).subscribe(
          data => {
-          this.getSchedulingShift();
+          this.getAllShiftList();
+        this.shiftid="";
+        this.EditShiftResult="";
+        
         
          },
          error => {
@@ -528,14 +545,21 @@ this._calendarService.updateSchedulingShift(updateshiftData).subscribe(
 
 
 // ----Delete Scheduling  Shift----//
-DeleteShift(shiftid) {
-  this._calendarService.deleteSchedulingShift(shiftid)
+ DeleteShift(_id: string) {
+  console.log(_id);
+  this._calendarService.deleteSchedulingShift(_id)
     .subscribe(successCode => {
   //this.statusCode = successCode;
     //Expecting success code 204 from server
   this.statusCode = 204;
-  this.getSchedulingShift();
+  this.getAllShiftList();
   this.show= false;
+  
+  this.shiftid="";
+      this.shiftForm.value.shift_name = '';
+      this.shiftForm.value.shift_datetime = '';
+        
+
   return true;
 },
 errorCode => this.statusCode = errorCode);    
@@ -621,8 +645,29 @@ CalendarColorCodeChange(calendarColorCode : string ) {
   
   console.log(this.calendarid,calendarColorCode);
 }
+
+//Get All Shift List
+getAllShiftList()
+{
+  this._calendarService.getSchedulingShift().subscribe(
+    data =>   this.SchedulingShiftResult = data);
+
 }
+
+ClearModel()
+{
+  console.log("clear")
+  this.calendarid="";
+  this.shiftid="";
+  this.EditShiftResult="";
+  this.EditCalendarResult="";
+
+      
   
+
+}
+
+}
 
  
 

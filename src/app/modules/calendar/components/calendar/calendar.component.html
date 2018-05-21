@@ -12,7 +12,93 @@
 </div>
 clear
 
-    
+
+   <div>
+    <button type="button" class="btn btn-primary" (click)="getAllShiftList()" >Shift List</button>
+    <div *ngFor="let shiftresult of SchedulingShiftResult">
+  <a (click)="EditShift(shiftresult._id)"  data-toggle="modal" data-target="#ShowShiftDetails"> {{shiftresult.name}}
+  </a>
+ 
+    </div>
+   </div> 
+
+ <!-- Modal Show Shift-->
+ <div class="modal fade" id="ShowShiftDetails" tabindex="-1" role="dialog" aria-labelledby="EditShiftModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content" style="width:55%">
+        <div class="modal-header">
+            <div class="col-sm-8" > <h4 class="modal-title" id="EditShiftModalLabel">{{EditShiftResult?.name}}</h4></div>
+   
+            <div class="col-sm-4">
+                <a class="closeShift" align="right" (click)="ClearModel()" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </a>
+              <a class="edit" style="margin-right:15px" (click)="EditShift(EditShiftResult._id)" data-dismiss="modal" data-toggle="modal" data-target="#EditShift"><i class="fa fa-pencil" aria-hidden="true"  align="right"></i></a>
+              <a class="delete" (click)="DeleteShift(EditShiftResult._id)" data-dismiss="modal" data-dismiss="modal"><i class="fa fa-trash" aria-hidden="true"  align="right"></i></a> 
+                
+      </div>
+         
+        
+        </div>
+        <div class="modal-body">
+        
+            <div class="col-sm-2" > <i class="fa fa-clock-o" aria-hidden="true"></i></div> <div class="col-sm-10" >  <span>{{EditShiftResult?.start_date| date}}</span></div><br/>
+            <div class="col-sm-2" ></div>  <div class="col-sm-10" >  <span>{{EditShiftResult?.start_time}}</span> - <span>{{EditShiftResult?.end_time}}</span></div><br/> 
+              <div class="col-sm-2" ></div>  <div class="col-sm-10" >  <span>Everyday Monday to Friday</span></div><br/>
+                <div class="col-sm-2" ><i class="fa fa-user" aria-hidden="true"></i> </div>  <div class="col-sm-10" >  <span>
+             {{EditShiftResult?.staffing}}
+           </span> </div>
+               
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="close"></button>
+         
+        </div>
+      </div>
+    </div>
+  </div>
+ <!-- Edit Shift Model -->
+ <div class="modal fade" id="EditShift" tabindex="-1" role="dialog" aria-labelledby="editshiftModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title" id="editshiftModalLabel">Edit Shift</h4>
+          
+          <button type="button" class="close" (click)="ClearModel()"  align="right" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+                <form [formGroup]="shiftForm" (ngSubmit)="editShiftTest(shiftForm)">
+                        <div class="form-group" [ngClass]="setClassShiftName()">
+                          <!--<label for="recipient-name" class="col-form-label">Calendar Name:</label>-->
+                          
+                         
+                            <input type="text" class="form-control" [ngModel]="EditShiftResult?.name" name="shift_name" formControlName="shift_name" placeholder="Shift Name" required>
+                        
+                        </div>
+                        <div class="form-group" [ngClass]="setClassShiftDateTime()"> 
+                         <!-- <label for="message-text" class="col-form-label">Report To:</label>-->
+                          <input class="form-control" [ngModel]="EditShiftResult?.start_date" [owlDateTime]="dt1" [owlDateTimeTrigger]="dt1" name="shift_datetime" formControlName="shift_datetime" placeholder="Shift Date Time" required>
+                          
+                          <owl-date-time #dt1></owl-date-time>
+                          
+                        </div>
+                      </form>
+              
+                
+        </div>
+        <div class="modal-footer">
+            <button type="button" (click)="ClearModel()" class="close"></button>
+          <button type="button" [disabled]="!shiftForm.valid"  class="btn btn-primary" (click)="clickModalShiftEdit(shiftForm)" data-dismiss="modal">Edit Shift</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+
            
 <div  class="col-lg-6 col-md-6 col-sm-9 col-xs-9" style="padding: 10px" align="center">
         
@@ -31,7 +117,7 @@ clear
                     
                       <h4 class="modal-title" id="exampleModalLabel">New Calendar</h4>
                       
-                      <button type="button" class="close" align="right" data-dismiss="modal" aria-label="Close">
+                      <button type="button" class="close" (click)="ClearModel()" align="right" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                       </button>
                     </div>
@@ -53,7 +139,7 @@ clear
                             
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="close"></button>
+                        <button type="button" class="close" (click)="ClearModel()"></button>
                       <button type="button" [disabled]="!calendarForm.valid"  class="btn btn-primary" (click)="clickModalTwo(calendarForm)" data-dismiss="modal">Create Calendar</button>
                     </div>
                   </div>
@@ -82,7 +168,7 @@ clear
                       
                         <h4 class="modal-title" id="exampleModalLabel">Edit Calendar</h4>
                         
-                        <button type="button" class="close" align="right" data-dismiss="modal" aria-label="Close">
+                        <button type="button" class="close" (click)="ClearModel()" align="right" data-dismiss="modal" aria-label="Close">
                           <span aria-hidden="true">&times;</span>
                         </button>
                       </div>
@@ -106,7 +192,7 @@ clear
                               
                       </div>
                       <div class="modal-footer">
-                          <button type="button" class="close"></button>
+                          <button type="button" (click)="ClearModel()" class="close"></button>
                         <button type="button" [disabled]="!calendarForm.valid"  class="btn btn-primary" (click)="clickModalTwoEdit(calendarForm)" data-dismiss="modal">Edit Calendar</button>
                       </div>
                     </div>
@@ -196,30 +282,13 @@ clear
                             
                             </div>
                           </div>
-                      
-
-
-
-                       
-                        
-
-        
-
-
-
-
-
-
-            
-
-                        
-                        <!-- Modal -->
+                     <!-- Modal -->
                         <div class="modal fade" id="createShift" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                           <div class="modal-dialog" role="document">
                             <div class="modal-content">
                               <div class="modal-header">
                                 <h4 class="modal-title" id="exampleModalLabel">New Shift</h4>
-                                <button type="button" class="close" align="right" data-dismiss="modal" aria-label="Close">
+                                <button type="button" class="close" align="right" (click)="ClearModel()" data-dismiss="modal" aria-label="Close">
                                   <span aria-hidden="true">&times;</span>
                                 </button>
                               </div>
@@ -244,7 +313,7 @@ clear
                                       
                               </div>
                               <div class="modal-footer">
-                                  <button type="button" class="close"></button>
+                                  <button type="button" (click)="ClearModel()" class="close"></button>
                                 <button type="button" [disabled]="!shiftForm.valid"  class="btn btn-primary" (click)="clickModalShift(shiftForm)" data-dismiss="modal">Create Shift</button>
                               </div>
                             </div>
