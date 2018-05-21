@@ -189,3 +189,109 @@ margin-left:15px;
  .calendar-list input[type=checkbox] {
     transform: scale(1.5);
   }
+
+  
+.month {
+    
+    width:100%;
+    border-collapse: collapse;
+    border-spacing: 0px; 
+    border: 1px solid #ddd;
+    color:rgb(75, 75, 75);
+    font-family: 'Times New Roman', Times, serif;
+
+}
+.month .row1{
+    height:120px;
+    
+}
+.month.dates{
+	color:rgb(173, 173, 173);
+}
+.month th{
+    border:1px solid #ddd;
+    color:rgb(119, 119, 119);
+}
+
+
+.month td{
+border: 1px solid rgb(236, 236, 236);
+
+
+} 
+
+/*====== days ======= */
+ 
+.days
+{
+    width:100%;
+    border-collapse: collapse;
+    border-spacing: 0px; 
+    border: 1px solid #ddd;
+    color:rgb(75, 75, 75);
+    font-family: 'Times New Roman', Times, serif;
+}
+.days th{
+    border:1px solid #ddd;
+    color:rgb(119, 119, 119);
+}
+
+.days td{
+    border: 1px solid rgb(236, 236, 236);
+
+}
+
+
+.days.secrow
+{
+   height:50px;
+   border-bottom: 4px solid #ddd;
+}
+
+.days.secrow1{
+   height:20px;
+     border-bottom:2px solid #ddd;  
+
+}
+
+/* ===Week=== */
+ 
+.week {
+    width:100%;
+    border-collapse: collapse;
+    border-spacing: 0px; 
+    border: 1px solid #ddd;
+    color:rgb(75, 75, 75);
+    font-family: 'Times New Roman', Times, serif;
+}
+.week th{
+    border:1px solid #ddd;
+    color:rgb(119, 119, 119);
+}
+
+.week td{
+    border: 1px solid rgb(236, 236, 236);
+
+}
+
+
+/* LIST */
+
+.bagdes{
+    padding: 30px;
+}
+
+.bagdes span{
+    margin-left:200px;
+    font-weight: 600;
+}
+
+.bagdes .form-control{
+    
+    float:right;
+    width:250px; 
+} 
+.table{
+    margin-top:50px;
+}
+
