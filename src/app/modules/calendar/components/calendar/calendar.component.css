@@ -201,6 +201,21 @@ margin-left:15px;
     font-family: 'Times New Roman', Times, serif;
 
 }
+
+/* =======table========== */
+
+.button-left{
+   margin:15px;
+}
+.button-left h4{
+    padding:0;
+    margin:0;
+}
+
+.button-right{
+    margin:15px 0;
+}
+
 .month .row1{
     height:120px;
     
@@ -212,7 +227,22 @@ margin-left:15px;
     border:1px solid #ddd;
     color:rgb(119, 119, 119);
 }
-
+.event {
+    
+      font-size: 13px;
+      border-radius: 4px;
+      margin-bottom: 5px;
+      line-height: 14px;
+      background: #e4f2f2;
+      border: 1px solid #b5dbdc;
+      color: #009aaf;
+      text-decoration: none;
+  }
+  .event-desc {
+	color: #666;
+	/* margin: 3px 0 7px 0; */
+	text-decoration: none;	
+}
 
 .month td{
 border: 1px solid rgb(236, 236, 236);
@@ -277,6 +307,10 @@ border: 1px solid rgb(236, 236, 236);
 
 /* LIST */
 
+
+.list{
+    padding-top:50px;
+}
 .bagdes{
     padding: 30px;
 }
@@ -295,3 +329,38 @@ border: 1px solid rgb(236, 236, 236);
     margin-top:50px;
 }
 
+/* shift-model-view */
+.closeShift
+{
+float: right;
+    font-size: 1.5rem;
+    font-weight: 700;
+    line-height: 1;
+    color: #000;
+    text-shadow: 0 1px 0 #fff;
+    opacity: .5;
+   
+
+}
+/*Edit*/
+.edit {
+   
+    font-size: 1.5rem;
+    font-weight: 700;
+    line-height: 1;
+    color: #000;
+    text-shadow: 0 1px 0 #fff;
+    opacity: .5;
+    
+}
+/*Edit*/
+.delete {
+    float: center;
+    font-size: 1.5rem;
+    font-weight: 700;
+    line-height: 1;
+    color: #000;
+    text-shadow: 0 1px 0 #fff;
+    opacity: .5;
+   
+}
