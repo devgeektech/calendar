@@ -372,3 +372,31 @@ float: right;
 }
 /* color-picker */
 
+
+/* radio button header */
+
+.wrapper{
+    width:600px;
+    height:60px;
+    padding:15px;
+}
+
+.wrapper label{
+    padding:12px;
+    font-size:18px;
+    color:grey
+}
+
+.searchbutton{
+  float:right;
+  margin-top:-38px;
+  border-left: none;
+
+}
+
+.search-box-wrapper{
+    margin-bottom:2rem;
+}
+
+
+

@@ -41,6 +41,7 @@ shiftid:string="";
  EditShiftResult:any;
  calendarShow:string = "month";
  listShow:string= "calendar";
+ contactShow:string="group";
 
 //  ----
 statusCode:number;
@@ -50,6 +51,9 @@ statusCode:number;
   private color: string = "#0299e5";
   private status:string="InActive";
   isChecked:boolean=false;
+
+  public contactResult:any;
+  public groupResult:any;
 
   constructor(private formBuilder: FormBuilder,protected router: Router,protected _calendarService:CalendarService) { }
 
@@ -70,6 +74,9 @@ statusCode:number;
    
 
     this.getScheduleCalendar()
+
+    this.getAllGroupByOrgID()
+    this.getAllContactByOrgID()
     // this.getCalendarByFromDateandToDate()
    }
   setClassCalendarName() {
@@ -600,7 +607,41 @@ statusCode:number;
     this.listShow="calendar";
     
   }
+  ContactShow()
+  {
+    this.contactShow="email";
+  }
+  // ----Get All Contact BY OrgID----//
+getAllContactByOrgID() {
+  let orgId="120";
+this._calendarService.getAllContactByOrgID(orgId).subscribe(
+  data =>   this.contactResult = data);
+}
+// ----Get All Contact BY OrgID----//
+
+// ----Get All Contact BY OrgID----//
+getAllGroupByOrgID() {
+let orgId="120";
+this._calendarService.getAllGroupByOrgID(orgId).subscribe(
+data =>   this.groupResult = data);
+}
+// ----Get All Contact BY OrgID----//
+
+onSelect(groupId:string) { 
+  let orgId="120";
+  console.log(groupId);
   
+  this._calendarService.getGroupByGroupID(orgId,groupId).subscribe(
+    data =>   this.groupResult = data);
+
+    let contactIds=this.groupResult.contactIds
+
+    
+this._calendarService.getAllContactByOrgID(orgId).subscribe(
+  data =>   this.contactResult = data);
+
+    
+}  
   }
   
   

@@ -1437,6 +1437,65 @@
                                     <owl-date-time #dt1></owl-date-time>
                                     
                                   </div>
+                                  <div class="wrapper">
+                                    Add Contact : 
+                                    <label class="radio-inline">
+                                        <input type="radio" name="optradio" checked (change)="contactShow='group'">Select From Group
+                                      </label>
+                                      <label class="radio-inline">
+                                        <input type="radio" name="optradio"  (change)="ContactShow()">Add Email
+                                        </label>
+                                        </div>
+                                        <div class="main" *ngIf="contactShow == 'group'">
+                                          <div >
+                                                <div class="form-group">  
+                                                   
+                                                  <select class="form-control" (change)="onSelect($event.target.value)"  id="sel1" style="margin-bottom: 2rem;" >  
+                                                    <option value="0">--Select Group--</option>  
+                                                    <option *ngFor="let group of groupResult.Result"  
+                                                            value={{group._id}}>  
+                                                        {{group.name}}  
+                                                    </option>  
+                             </select> 
+
+                                                   
+                                            </div> 
+                                            </div>
+                                            <!--  -->
+                               
+                                            <div><p>25 Contacts</p></div>
+                                           <div class="search-box-wrapper form-group">
+                                               <input type="text" class="search-box-input form-control">
+                                               <button class="btn btn-primary searchbutton" ><i class="fas fa-search"></i>
+                               
+                                               </button> 
+                                      
+                                            
+                                           </div> 
+                                           <!-- List -->
+                                           <div>
+                                               <ul>
+                                              <li *ngFor="let result of contactResult.Result" ><input type="checkbox"><span>{{result.firstName}} </span><span>{{result.lastName}}</span></li>
+                                               </ul>
+                                           </div>
+                                         </div> 
+                                        <!---Add Email-->
+                                           
+                                        <div *ngIf="contactShow == 'email'"  class="main">
+                               
+                                           <div class="search-box-wrapper form-group">
+                                               <input type="text" class="search-box-input form-control">
+                                               <!-- List -->
+                                           <div>
+                                              <ul>
+                                             <li *ngFor="let result of contactResult.Result" ><span>{{result.firstName}} </span><span>{{result.lastName}}</span><br/>
+                                            <span >{{result.emailIds.office}}</span>
+                                            </li>
+                                              </ul>
+                                          </div>
+                                              </div>
+                                        </div>
+                               
                                 </form>
                         
                           

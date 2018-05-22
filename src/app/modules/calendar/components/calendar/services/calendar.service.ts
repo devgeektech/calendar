@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Jsonp, Http, Response, Headers, RequestOptions } from '@angular/http';
 import { apiBaseUrlServer } from '../../../../../models/config/config';
+import { apiBaseUrlServer1 } from '../../../../../models/config/config';
 
 import {CookieService, CookieOptionsArgs } from 'angular2-cookie/core';
 import {Observable, Observer } from 'rxjs/Rx';
@@ -16,7 +17,7 @@ import 'rxjs/add/observable/of';
 
 export class CalendarService {
   apiBaseUrlServer : string = apiBaseUrlServer;
-
+  apiBaseUrlServer1:string=apiBaseUrlServer1;
   constructor(
     private http : Http,
     private _cookieService:CookieService
@@ -472,6 +473,56 @@ getCalendarByFromDateandToDate(staff)
     .map((res:Response) => res.json()) 
     .catch((error:any) => Observable.throw(error || 'Server error'));
    }
+
+//---------getContactByOrgID-------------------
+
+getAllContactByOrgID(orgid)  {
+
+  let serverUrl = apiBaseUrlServer1 + '/contacts/' + orgid;
+  let headers= new Headers({ 'Content-Type': 'application/json' });
+  let token='eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOjI1OSwiaXNzIjoiaHR0cDovLzUyLjMyLjI1My4xOTEvY21zYXBpX2p3dC9wdWJsaWMvYXBpL2xvZ2luIiwiaWF0IjoxNTI2OTc4MDk1LCJleHAiOjQ4MTUyNjk3ODA5NSwibmJmIjoxNTI2OTc4MDk1LCJqdGkiOiJRWloyNngzRnNSQXh6QWtaIn0.j4nVIVq1twGJyjES4BEaF2StJbS5yPslFDAn0D40RZ8';
+  headers.append('Authorization',' '+token);
+  let options = new RequestOptions({ headers: headers });
+  return this.http.get(serverUrl,options) 
+    .map((res:Response) => res.json()) 
+    .catch((error:any) => Observable.throw(error || 'Server error'));
+   }
+//---------getContactByOrgID-------------------
+
+
+ //---------getGroupByOrgID-------------------
+
+ getAllGroupByOrgID(orgid)  {
+
+  let serverUrl = apiBaseUrlServer1 + '/groups/' + orgid;
+  let headers= new Headers({ 'Content-Type': 'application/json' });
+  let token='eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOjI1OSwiaXNzIjoiaHR0cDovLzUyLjMyLjI1My4xOTEvY21zYXBpX2p3dC9wdWJsaWMvYXBpL2xvZ2luIiwiaWF0IjoxNTI2OTc4MDk1LCJleHAiOjQ4MTUyNjk3ODA5NSwibmJmIjoxNTI2OTc4MDk1LCJqdGkiOiJRWloyNngzRnNSQXh6QWtaIn0.j4nVIVq1twGJyjES4BEaF2StJbS5yPslFDAn0D40RZ8';
+  headers.append('Authorization',' '+token);
+  let options = new RequestOptions({ headers: headers });
+  return this.http.get(serverUrl,options) 
+    .map((res:Response) => res.json()) 
+    .catch((error:any) => Observable.throw(error || 'Server error'));
+   }
+//---------getContactByOrgID-------------------
+
+
+//---------getGroupByOrgID-------------------
+
+getGroupByGroupID(orgid,groupid)  {
+
+  let serverUrl = apiBaseUrlServer1 + '/groups/' + orgid +'/' +groupid;
+  let headers= new Headers({ 'Content-Type': 'application/json' });
+  let token='eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOjI1OSwiaXNzIjoiaHR0cDovLzUyLjMyLjI1My4xOTEvY21zYXBpX2p3dC9wdWJsaWMvYXBpL2xvZ2luIiwiaWF0IjoxNTI2OTc4MDk1LCJleHAiOjQ4MTUyNjk3ODA5NSwibmJmIjoxNTI2OTc4MDk1LCJqdGkiOiJRWloyNngzRnNSQXh6QWtaIn0.j4nVIVq1twGJyjES4BEaF2StJbS5yPslFDAn0D40RZ8';
+  headers.append('Authorization',' '+token);
+  let options = new RequestOptions({ headers: headers });
+  return this.http.get(serverUrl,options) 
+    .map((res:Response) => res.json()) 
+    .catch((error:any) => Observable.throw(error || 'Server error'));
+   }
+//---------getContactByOrgID-------------------
+
+
+
 
 
 
