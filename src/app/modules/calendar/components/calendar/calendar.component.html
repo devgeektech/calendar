@@ -1,7 +1,7 @@
 <div class="main-container">
   <div class="container">
     <h2 class="text-uppercase">Calendar</h2>
-    <div class="col-md-3 col-sm-12 col-lg-3 red-border">
+    <div class="col-md-3 col-sm-12 col-lg-3">
       <div class="datepicker datepicker-inline">
         <div class="datepicker-days" style="display: block;">
           <table class=" table-condensed">
@@ -186,143 +186,21 @@
            <input type="checkbox" name="optionsRadios" id="checkOther" class="checkmark" value="other">
        <span ><label for="checkOther"> </label>{{ result.name}}
         </span>
-       <a><i class="three-dots fas fa-ellipsis-v pull-right" (click) ="OpenCalendarModel(result._id)"></i></a>
+        <i class="three-dots fas fa-ellipsis-v pull-right"></i>
       </a>
       
 
         </li>
         <!-- calendar-details -->
 
-        <div *ngIf="show" style="float:right!important;position: relative;border: 2px solid lightgrey;padding: 10px;border-radius: 5px;">
         
-
-            <div class="deal-text"> 
-
-                    <div class="row">
-                        
-                      <div class="col-md-12 col-sm-12">
-                          <div class="form-group">
-                              <div class="col-md-8" align="left">
-                                <h3>Calendar Details </h3>
-                            </div>
-                              <div class="col-md-4" align="right">
-                          <i class="fa fa-times deal-report-cross" style="cursor: pointer;text-align: right;"  aria-hidden="true" (click)="closeCalendarModel()"></i>
-                              </div>
-                          </div><br/>
-                          <div class="form-group">
-                              <div class="col-md-5" align="left">
-                            
-
-                              <button type="button" class="btn btn-primary"  data-toggle="modal" data-target="#createShift">
-                                  Add Shift
-                                 </button>
-                                </div>
-                            <div class="col-md-7">
-                            
-                            </div>
-                          </div>
-                          <div class="clear"></div>
-                          <br/>
-                
-                          <div class="form-group">
-                              <div class="col-md-5" align="left">
-                            
-                               
-                              <button  type="button" class="btn btn-primary" (click)="EditCalendar(calendarid)"  data-toggle="modal" data-target="#editCalendar">
-                                  Edit
-                                 </button>
-                              </div>
-                                 <div class="col-md-7">
-                            
-                                  </div>
-                          </div>
-                          <br/>
-                          <div class="clear"></div>
-                          <div class="form-group">
-                              <div class="col-md-5" align="left"> 
-                               Status:
-                              </div>
-                            <div class="col-md-7" align="left">
-                                <ui-switch  [checked]="isChecked"   (change)="UpdateCalendarStatus($event)" size="small"  ></ui-switch>
-                                               <span style="margin-left:25px;vertical-align:top;"> {{status}}</span>
-                            </div>
-                          </div>
-                          <br/>
-                          <div class="clear"></div>
-                          <div class="form-group">
-                              <div class="col-md-5" align="left">
-                              Calendar Code: 
-                              </div>
-                            <div class="col-md-7" align="left">
-                                <input type="text" name="calendarcode"     [value]="color" [style.background]="color" 
-                                [cpPresetColors]="['#fff', '#000', '#2889e9', '#e920e9', '#fff500', 'rgb(236,64,64)']"
-                               [(colorPicker)]="color" ><br/><br/>
-     
-                               <button  type="button"   class="btn btn-primary" (click)="CalendarColorCodeChange(color)">Update Calendar Code</button>
-     
-                            </div>
-                          </div>
-                      <div class="form-group">
-                          <div class="col-md-5" align="left">
-                              <button  type="button"   class="btn btn-danger" (click)="DeleteCalendar(calendarid)"  >Delete Calendar</button>
-                              </div>
-                              <div class="col-md-7">
-                         
-                        </div>
-
-                        </div>
-                
-                          
-                      
-                      </div>
-                    </div>
-               <!-- Modal -->
-                  <div class="modal fade" id="createShift" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                    <div class="modal-dialog" role="document">
-                      <div class="modal-content">
-                        <div class="modal-header">
-                          <h4 class="modal-title" id="exampleModalLabel">New Shift</h4>
-                          <button type="button" class="close" align="right" (click)="ClearModel()" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                          </button>
-                        </div>
-                        <div class="modal-body">
-                                <form [formGroup]="shiftForm" (ngSubmit)="createShiftTest(shiftForm)">
-                                        <div class="form-group" [ngClass]="setClassShiftName()">
-                                          <!--<label for="recipient-name" class="col-form-label">Calendar Name:</label>-->
-                                          
-                                         
-                                            <input type="text" class="form-control" name="shift_name" formControlName="shift_name" placeholder="Shift Name" required>
-                                        
-                                        </div>
-                                        <div class="form-group" [ngClass]="setClassShiftDateTime()"> 
-                                         <!-- <label for="message-text" class="col-form-label">Report To:</label>-->
-                                          <input class="form-control" [owlDateTime]="dt1" [owlDateTimeTrigger]="dt1" name="shift_datetime" formControlName="shift_datetime" placeholder="Shift Date Time" required>
-                                          
-                                          <owl-date-time #dt1></owl-date-time>
-                                          
-                                        </div>
-                                      </form>
-                              
-                                
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" (click)="ClearModel()" class="close"></button>
-                          <button type="button" [disabled]="!shiftForm.valid"  class="btn btn-primary" (click)="clickModalShift(shiftForm)" data-dismiss="modal">Create Shift</button>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-          
-            </div>
-          </div>
         <!-- </div>-->
       </ul>
     </div>
     </div>
 
 
-    <div class="col-md-9 col-sm-12 col-lg-9 red-border">
+    <div class="col-md-9 col-sm-12 col-lg-9">
   
        <span class="button-left pull-left" >
          <button type="button"> &#10094;</button>
@@ -1411,7 +1289,168 @@
               </table>
     </div>
 
-  </div>
 
+  </div>
+  <div class="modal fade" id="editCalendar" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+          
+            <h4 class="modal-title" id="exampleModalLabel">Edit Calendar</h4>
+            
+            <button type="button" class="close" (click)="ClearModel()" align="right" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+                  <form   [formGroup]="calendarForm" (ngSubmit)="editCalendarTest(calendarForm)">
+                          <div class="form-group" [ngClass]="setClassCalendarName()">
+                            <!--<label for="recipient-name" class="col-form-label">Calendar Name:</label>-->
+                          
+                           
+                           
+                          
+                              <input type="text" class="form-control" [ngModel]="EditCalendarResult?.name"     name="calendar_name" formControlName="calendar_name" placeholder="Calendar Name">
+                          
+                          </div>
+                          <div class="form-group" [ngClass]="setClassReportTo()">
+                           <!-- <label for="message-text" class="col-form-label">Report To:</label>-->
+                            <textarea class="form-control" name="report_to" [ngModel]="EditCalendarResult?.emailNotificationList" formControlName="report_to" placeholder="Report To"></textarea>
+                          </div>
+                        </form>
+                
+                  
+          </div>
+          <div class="modal-footer">
+              <button type="button" (click)="ClearModel()" class="close"></button>
+            <button type="button" [disabled]="!calendarForm.valid"  class="btn btn-primary" (click)="clickModalTwoEdit(calendarForm)" data-dismiss="modal">Edit Calendar</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  <div *ngIf="show" style="float:right!important;position: relative;border: 2px solid lightgrey;padding: 10px;border-radius: 5px;">
+        
+
+      <div class="deal-text"> 
+
+              <div class="row">
+                  
+                <div class="col-md-12 col-sm-12">
+                    <div class="form-group">
+                        <div class="col-md-8" align="left">
+                          <h3>Calendar Details </h3>
+                      </div>
+                        <div class="col-md-4" align="right">
+                    <i class="fa fa-times deal-report-cross" style="cursor: pointer;text-align: right;"  aria-hidden="true" (click)="closeCalendarModel()"></i>
+                        </div>
+                    </div><br/>
+                    <div class="form-group">
+                        <div class="col-md-5" align="left">
+                      
+
+                        <button type="button" class="btn btn-primary"  data-toggle="modal" data-target="#createShift">
+                            Add Shift
+                           </button>
+                          </div>
+                      <div class="col-md-7">
+                      
+                      </div>
+                    </div>
+                    <div class="clear"></div>
+                    <br/>
+          
+                    <div class="form-group">
+                        <div class="col-md-5" align="left">
+                      
+                         
+                        <button  type="button" class="btn btn-primary" (click)="EditCalendar(calendarid)"  data-toggle="modal" data-target="#editCalendar">
+                            Edit
+                           </button>
+                        </div>
+                           <div class="col-md-7">
+                      
+                            </div>
+                    </div>
+                    <br/>
+                    <div class="clear"></div>
+                    <div class="form-group">
+                        <div class="col-md-5" align="left"> 
+                         Status:
+                        </div>
+                      <div class="col-md-7" align="left">
+                          <ui-switch  [checked]="isChecked"   (change)="UpdateCalendarStatus($event)" size="small"  ></ui-switch>
+                                         <span style="margin-left:25px;vertical-align:top;"> {{status}}</span>
+                      </div>
+                    </div>
+                    <br/>
+                    <div class="clear"></div>
+                    <div class="form-group">
+                        <div class="col-md-5" align="left">
+                        Calendar Code: 
+                        </div>
+                      <div class="col-md-7" align="left">
+                          <input type="text" name="calendarcode"     [value]="color" [style.background]="color" 
+                          [cpPresetColors]="['#fff', '#000', '#2889e9', '#e920e9', '#fff500', 'rgb(236,64,64)']"
+                         [(colorPicker)]="color" ><br/><br/>
+
+                         <button  type="button"   class="btn btn-primary" (click)="CalendarColorCodeChange(color)">Update Calendar Code</button>
+
+                      </div>
+                    </div>
+                <div class="form-group">
+                    <div class="col-md-5" align="left">
+                        <button  type="button"   class="btn btn-danger" (click)="DeleteCalendar(calendarid)"  >Delete Calendar</button>
+                        </div>
+                        <div class="col-md-7">
+                   
+                  </div>
+
+                  </div>
+          
+                    
+                
+                </div>
+              </div>
+         <!-- Modal -->
+            <div class="modal fade" id="createShift" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+              <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h4 class="modal-title" id="exampleModalLabel">New Shift</h4>
+                    <button type="button" class="close" align="right" (click)="ClearModel()" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <div class="modal-body">
+                          <form [formGroup]="shiftForm" (ngSubmit)="createShiftTest(shiftForm)">
+                                  <div class="form-group" [ngClass]="setClassShiftName()">
+                                    <!--<label for="recipient-name" class="col-form-label">Calendar Name:</label>-->
+                                    
+                                   
+                                      <input type="text" class="form-control" name="shift_name" formControlName="shift_name" placeholder="Shift Name" required>
+                                  
+                                  </div>
+                                  <div class="form-group" [ngClass]="setClassShiftDateTime()"> 
+                                   <!-- <label for="message-text" class="col-form-label">Report To:</label>-->
+                                    <input class="form-control" [owlDateTime]="dt1" [owlDateTimeTrigger]="dt1" name="shift_datetime" formControlName="shift_datetime" placeholder="Shift Date Time" required>
+                                    
+                                    <owl-date-time #dt1></owl-date-time>
+                                    
+                                  </div>
+                                </form>
+                        
+                          
+                  </div>
+                  <div class="modal-footer">
+                      <button type="button" (click)="ClearModel()" class="close"></button>
+                    <button type="button" [disabled]="!shiftForm.valid"  class="btn btn-primary" (click)="clickModalShift(shiftForm)" data-dismiss="modal">Create Shift</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+    
+      </div>
+    </div>
+</div>
 </div>
     

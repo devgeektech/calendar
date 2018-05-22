@@ -225,7 +225,8 @@ margin-left:15px;
 }
 .month th{
     border:1px solid #ddd;
-    color:rgb(119, 119, 119);
+    color:rgb(255, 255, 255);
+    background-color: #7c2380;
 }
 .event {
     
@@ -263,7 +264,8 @@ border: 1px solid rgb(236, 236, 236);
 }
 .days th{
     border:1px solid #ddd;
-    color:rgb(119, 119, 119);
+    color:rgb(255, 255, 255);
+    background-color: #7c2380;
 }
 
 .days td{
@@ -296,7 +298,8 @@ border: 1px solid rgb(236, 236, 236);
 }
 .week th{
     border:1px solid #ddd;
-    color:rgb(119, 119, 119);
+    color:rgb(255, 255, 255);
+    background-color: #7c2380;
 }
 
 .week td{
@@ -339,6 +342,7 @@ float: right;
     color: #000;
     text-shadow: 0 1px 0 #fff;
     opacity: .5;
+    cursor: pointer;
    
 
 }
@@ -351,6 +355,7 @@ float: right;
     color: #000;
     text-shadow: 0 1px 0 #fff;
     opacity: .5;
+    cursor: pointer;
     
 }
 /*Edit*/
@@ -362,5 +367,8 @@ float: right;
     color: #000;
     text-shadow: 0 1px 0 #fff;
     opacity: .5;
+    cursor: pointer;
    
 }
+/* color-picker */
+
