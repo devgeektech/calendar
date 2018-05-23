@@ -7,7 +7,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { OwlDateTimeModule, OwlNativeDateTimeModule } from 'ng-pick-datetime';
 import { UiSwitchModule } from 'angular2-ui-switch';
 import { ColorPickerModule } from 'ngx-color-picker';
-
+import { DatePickerDirective } from './components/datepicker/date-picker.directive';
+import  { DatePickerComponent } from './components/datepicker/datepicker.component'
 @NgModule({
   imports: [
     CommonModule,
@@ -19,6 +20,6 @@ import { ColorPickerModule } from 'ngx-color-picker';
     UiSwitchModule,
     ColorPickerModule
   ],
-  declarations: [CalendarComponent]
+  declarations: [CalendarComponent, DatePickerComponent,DatePickerDirective]
 })
 export class CalendarModule { }

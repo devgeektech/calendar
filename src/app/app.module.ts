@@ -28,7 +28,11 @@ import { LeftSidebarComponent } from './features/layout/components/left-sidebar/
     ReactiveFormsModule,
     HttpModule,
     BrowserAnimationsModule,
-    CalendarModule
+    CalendarModule,
+    
+    
+    
+    
     
   ],
   providers: [services],

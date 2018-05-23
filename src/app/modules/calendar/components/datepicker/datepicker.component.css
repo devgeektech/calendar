@@ -1,0 +1,84 @@
+.date-picker {
+    width: 200px;
+    /* position: absolute; */
+    z-index: 999;
+    left: calc(100% - 200px);
+ 
+  }
+  
+  .dp {
+    margin: 0 !important;
+  }
+  
+  button.dp{
+    /* border: 1px solid #cccccc; */
+    border: none;
+  }
+  
+  button.dp[disabled] {
+    /*background-color: #e6e6e6;*/
+  }
+  
+  .year, .month, .year-arrow, .month-arrow, .day-names {
+    height: 20px;
+    /*background-color: white;*/
+    background-color: #fff;
+    color: #4a4a4a;
+  }
+  
+  .year-arrow {
+    width: 40px;
+  }
+  
+  
+  .year {
+    width: 120px;
+  }
+  
+  .month-arrow {
+    width: 40px;
+  }
+  
+  .month {
+    width: 120px;
+  }
+  
+  .day-names {
+    width: 200px;
+    color: white;
+  }
+  
+  .day-names span{
+    display: inline-block;
+    width: 28.57px !important;
+    text-align: center;
+    padding-top: 0px;
+    /*background-color: #666666;*/
+    background-color: #7c2380;
+    font-family: monospace;
+    /*font-weight: bold;*/
+  }
+  
+  .days {
+    background-color: #fff;
+  }
+  
+  .day {
+    padding-bottom: 25px;
+    width: 28.57px;
+    height: 28.57px;
+    vertical-align: middle;
+    background-color: #fff;
+    color: #4a4a4a;
+  }
+  
+  .day.selected {
+    background-color: #7c2380 !important;
+    color: rgb(255, 255, 255);
+    text-decoration:none;
+  }
+  
+  .day.exists {
+    background-color: #fff;
+  }
+  
