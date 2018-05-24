@@ -12,6 +12,7 @@ import { services } from './app.services';
 import { LayoutComponent } from './features/layout/layout.component';
 import { HeaderComponent } from './features/layout/components/header/header.component';
 import { LeftSidebarComponent } from './features/layout/components/left-sidebar/left-sidebar.component';
+import { FilterPipe } from './shared/pipes/filter.pipe';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { LeftSidebarComponent } from './features/layout/components/left-sidebar/
     LoginComponent,
     HeaderComponent,
     LeftSidebarComponent,
-    LayoutComponent
+    LayoutComponent,
+    FilterPipe
   ],
   imports: [
     BrowserModule,

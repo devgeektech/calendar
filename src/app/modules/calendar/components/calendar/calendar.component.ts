@@ -5,6 +5,9 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { DatePipe } from '@angular/common';
 import {FormsModule,ReactiveFormsModule} from '@angular/forms';
 import { UiSwitchModule } from 'angular2-ui-switch';
+import { forEach } from '@angular/router/src/utils/collection';
+
+
 
 
 
@@ -13,7 +16,9 @@ import { UiSwitchModule } from 'angular2-ui-switch';
   selector: 'app-calendar',
   templateUrl: './calendar.component.html',
   styleUrls: ['./calendar.component.css'],
-  providers:[CalendarService],
+  
+  providers:[CalendarService]
+  
 })
 export class CalendarComponent implements OnInit,OnChanges{
     
@@ -46,8 +51,8 @@ shiftid:string="";
  calendarShow:string = "month";
  listShow:string= "calendar";
  contactShow:string="group";
- timeZone:string='';
-//  ----
+timeZone:string="";
+contactid: any[] = [];
 statusCode:number;
   public calendarResult: any;
   public calendarShiftResult:any;
@@ -126,7 +131,7 @@ today: Date;
     this.getScheduleCalendar()
 
     this.getAllGroupByOrgID()
-    this.getAllContactByOrgID()
+    this.getAllContactByOrgID("")
     // this.getCalendarByFromDateandToDate()
    }
 
@@ -732,9 +737,9 @@ today: Date;
     this.contactShow="email";
   }
   // ----Get All Contact BY OrgID----//
-getAllContactByOrgID() {
+getAllContactByOrgID(contactId) {
   let orgId="120";
-this._calendarService.getAllContactByOrgID(orgId).subscribe(
+this._calendarService.getAllContactByOrgID(orgId,contactId).subscribe(
   data =>   this.contactResult = data);
 }
 // ----Get All Contact BY OrgID----//
@@ -749,19 +754,37 @@ data =>   this.groupResult = data);
 
 onSelect(groupId:string) { 
   let orgId="120";
-  console.log(groupId);
-  
+  //console.log(groupId);
+  let groupResultByGroupID:any;
   this._calendarService.getGroupByGroupID(orgId,groupId).subscribe(
-    data =>   this.groupResult = data);
-
-    let contactIds=this.groupResult.contactIds
-
+    data =>  { groupResultByGroupID = data
     
-this._calendarService.getAllContactByOrgID(orgId).subscribe(
-  data =>   this.contactResult = data);
+     console.log("ContactID", data[0].contactIds);
+     
+     for(var  contactid in  data[0].contactIds)
+     {
 
+     this.getAllContactByOrgID(contactid)
+     }
+    });
+  }
+  OnCheckedContact(_id :string)
+  {
+    console.log("Contactid",_id)
+  //if(e.target.checked==true)
+  //{
     
-}  
+    this.contactid.push(_id)
+  //}
+  //else if(e.target.checked==false)
+  //{
+  //  console.log("Contactid",_id)
+   // this.contactid.indexOf(_id)
+  //}
+
+    console.log("Array contact", this.contactid)
+
+  }  
   }
   
   

@@ -210,7 +210,7 @@
          <button type="button" (click)="nextMonth()">&#10095;</button>
          <div class="day1">
             
-            <button type="button">today</button><span>{{months[month]}}</span></div>
+            <button type="button">today</button><span>{{months[month]}} {{year}}</span></div>
           
          </div>
 </div>
@@ -1251,6 +1251,65 @@
                           <owl-date-time #dt1></owl-date-time>
                           
                         </div>
+                        <div class="wrapper">
+                            Add Contact : 
+                            <label class="radio-inline">
+                                <input type="radio" name="optradio" checked (change)="contactShow='group'">Select From Group
+                              </label>
+                              <label class="radio-inline">
+                                <input type="radio" name="optradio"  (change)="ContactShow()">Add Email
+                                </label>
+                          </div>
+                                <div class="main" *ngIf="contactShow == 'group'">
+                                  <div>
+                                        <div class="form-group">  
+                                           
+                                          <select class="form-control" (change)="onSelect($event.target.value)"  id="sel1" style="margin-bottom: 2rem;" >  
+                                            <option value="0">--Select Group--</option>  
+                                            <option *ngFor="let group of groupResult.Result"  
+                                                    value={{group._id}}>  
+                                                {{group.name}}  
+                                            </option>  
+                                          </select> 
+
+                                           
+                                    </div> 
+                                    </div>
+                                    <!--  -->
+                       
+                                    <div><p align="right">{{contactResult.Result ? contactResult.Result.length : ''}} Contacts</p></div>
+                                   <div class="search-box-wrapper form-group">
+                                       <input type="text" class="search-box-input form-control"  >
+                                       <button class="btn btn-primary searchbutton" ><i class="fas fa-search"></i>
+                       
+                                       </button> 
+                              
+                                    
+                                   </div> 
+                                   <!-- List -->
+                                   <div>
+                                       
+                                      <div *ngFor="let result of contactResult.Result"><input type="checkbox">   <span style="margin-left: 10px">{{result.firstName}} </span><span>{{result.lastName}}</span></div>
+                                       
+                                   </div>
+                                 </div> 
+                                <!---Add Email-->
+                                   
+                                <div *ngIf="contactShow == 'email'"  class="main">
+                       
+                                   <div class="search-box-wrapper form-group">
+                                       <input type="text" class="search-box-input form-control">
+                                       <!-- List -->
+                                   <div>
+                                    
+                                     <div *ngFor="let result of contactResult.Result" ><span>{{result.firstName}} </span><span>{{result.lastName}}</span><br/>
+                                    <span >{{result.emailIds.office}}</span>
+                                     </div>
+                                    
+                                  </div>
+                                      </div>
+                                </div>
+                       
                       </form>
               
                 
@@ -1336,7 +1395,7 @@
         </div>
       </div>
     </div>
-  <div *ngIf="show" style="float:right!important;position: relative;border: 2px solid lightgrey;padding: 10px;border-radius: 5px;">
+  <div *ngIf="show"  style="float:left!important;position: relative;border: 2px solid lightgrey;padding: 10px;border-radius: 5px;">
         
 
       <div class="deal-text"> 
@@ -1453,9 +1512,9 @@
                                       <label class="radio-inline">
                                         <input type="radio" name="optradio"  (change)="ContactShow()">Add Email
                                         </label>
-                                        </div>
+                                  </div>
                                         <div class="main" *ngIf="contactShow == 'group'">
-                                          <div >
+                                          <div>
                                                 <div class="form-group">  
                                                    
                                                   <select class="form-control" (change)="onSelect($event.target.value)"  id="sel1" style="margin-bottom: 2rem;" >  
@@ -1464,16 +1523,16 @@
                                                             value={{group._id}}>  
                                                         {{group.name}}  
                                                     </option>  
-                             </select> 
+                                                  </select> 
 
                                                    
                                             </div> 
                                             </div>
                                             <!--  -->
                                
-                                            <div><p>25 Contacts</p></div>
+                                            <div><p align="right">{{contactResult.Result ? contactResult.Result.length : ''}} Contacts</p></div>
                                            <div class="search-box-wrapper form-group">
-                                               <input type="text" class="search-box-input form-control">
+                                               <input type="text" class="search-box-input form-control" [(ngModel)]="term">
                                                <button class="btn btn-primary searchbutton" ><i class="fas fa-search"></i>
                                
                                                </button> 
@@ -1482,9 +1541,9 @@
                                            </div> 
                                            <!-- List -->
                                            <div>
-                                               <ul>
-                                              <li *ngFor="let result of contactResult.Result" ><input type="checkbox"><span>{{result.firstName}} </span><span>{{result.lastName}}</span></li>
-                                               </ul>
+                                               
+                                              <div *ngFor="let result of contactResult.Result " ><input type="checkbox" name="{{result._id}}" value="{{result._id}}"  (change)="OnCheckedContact(result._id,$event.target.value)" >   <span style="margin-left: 10px">{{result.firstName}} </span><span>{{result.lastName}}</span></div>
+                                               
                                            </div>
                                          </div> 
                                         <!---Add Email-->
@@ -1495,11 +1554,11 @@
                                                <input type="text" class="search-box-input form-control">
                                                <!-- List -->
                                            <div>
-                                              <ul>
-                                             <li *ngFor="let result of contactResult.Result" ><span>{{result.firstName}} </span><span>{{result.lastName}}</span><br/>
+                                            
+                                             <div *ngFor="let result of contactResult.Result" ><span>{{result.firstName}} </span><span>{{result.lastName}}</span><br/>
                                             <span >{{result.emailIds.office}}</span>
-                                            </li>
-                                              </ul>
+                                             </div>
+                                            
                                           </div>
                                               </div>
                                         </div>
