@@ -93,7 +93,7 @@
       </div>
       <div class="calendar-timezone">
         <i class="fas fa-globe"></i>
-        <span>Timezone:Newyork</span>
+        <span>Timezone:{{timeZone}}</span>
       </div>
 
       <!-- calendar -->
@@ -204,38 +204,43 @@
 
 
     <div class="col-md-9 col-sm-12 col-lg-9">
-  
-       <span class="button-left pull-left" >
-         <button type="button"> &#10094;</button>
-         <button type="button"> &#10095;</button>
-         <span><h4>today</h4></span>
-        </span>
-
-      <span class="button-right pull-right" >
+       <div >
+       <div class="button-left pull-left" >
+         <button type="button" (click)="prevMonth()"> &#10094;</button>
+         <button type="button" (click)="nextMonth()">&#10095;</button>
+         <div class="day1">
+            
+            <button type="button">today</button><span>{{months[month]}}</span></div>
+          
+         </div>
+</div>
+      <span class="button-right pull-right">
         <button type="button" (click)="calendarShow='month'">month</button>
         <button type="button" (click)="calendarShow='week'">week</button>
         <button type="button" (click)="calendarShow='days'">day</button>
         <button type="button" (click)="calendarShow='list';CalendarShow()">list</button>
       </span>
       <!-- month-->
-      <table *ngIf="calendarShow == 'month'" class="month">
-        <thead>
-          <tr>
-            <th>Sun</th>
-            <th>Mon</th>
-            <th>Tue</th>
-            <th>Wed</th>
-            <th>Thu</th>
-            <th>Fri</th>
-            <th>Sat</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr class="row1">
-            <td class="dates">29</td>
-            <td class="dates">30</td>
-            <td>1</td>
-            <td>2
+      <div *ngIf="calendarShow == 'month'">
+      <div class="month">
+            
+        <div>Sun</div>
+        <div>Mon</div>
+        <div>Tue</div>
+        <div>Wed</div>
+        <div>Thu</div>
+        <div>Fri</div>
+        <div>Sat</div>
+          
+        
+     </div>
+          <div class="row1" *ngFor="let nday of days" [ngClass]="{day: true, selected: isSelected(nday), exists: (nday!=null)}" (click)="select(nday)">{{nday || ''}}
+            </div>
+            </div>
+            <!-- <td class="dates"></td>
+            <td class="dates"></td>
+            <td></td>
+            <td>
               <div class="event">
                 <div class="event-desc">
                     HTML 5 lecture with Brad Traversy from Eduonix
@@ -292,10 +297,10 @@
             <td>6</td>
             <td>7</td>
             <td>8</td>
-            <td>9</td>
-          </tr>
-        </tbody>
-      </table>
+            <td>9</td> -->
+ 
+      
+    
 
       <!--days-->
 

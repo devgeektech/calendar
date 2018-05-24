@@ -194,15 +194,40 @@ margin-left:15px;
 .month {
     
     width:100%;
-    border-collapse: collapse;
-    border-spacing: 0px; 
+    background-color: #381794;
+     overflow:auto;
     border: 1px solid #ddd;
     color:rgb(75, 75, 75);
     font-family: 'Times New Roman', Times, serif;
 
 }
 
+    .month div {
+        width: 11%;
+        color: #fff;
+        text-align: center;
+        overflow: hidden;
+        float: left;
+    
+}
+
 /* =======table========== */
+
+.day1 {
+     float:right;
+ 
+}
+
+
+.day1 button{
+   margin-left:12px;
+}
+
+.day1 span{
+    margin-left:220px;
+    font-size: 24px;
+}
+
 
 .button-left{
    margin:15px;
@@ -216,9 +241,15 @@ margin-left:15px;
     margin:15px 0;
 }
 
-.month .row1{
+.row1{
+    width:137px;
     height:120px;
-    
+    float:left;
+    border-collapse: collapse;
+    border-spacing: 0px; 
+    border: 1px solid #ddd;
+    color:rgb(75, 75, 75);
+    font-family: 'Times New Roman', Times, serif;
 }
 .month.dates{
 	color:rgb(173, 173, 173);
@@ -226,7 +257,7 @@ margin-left:15px;
 .month th{
     border:1px solid #ddd;
     color:rgb(255, 255, 255);
-    background-color: #7c2380;
+    background-color: #381794;
 }
 .event {
     
@@ -265,7 +296,7 @@ border: 1px solid rgb(236, 236, 236);
 .days th{
     border:1px solid #ddd;
     color:rgb(255, 255, 255);
-    background-color: #7c2380;
+    background-color: #381794;
 }
 
 .days td{
@@ -299,7 +330,7 @@ border: 1px solid rgb(236, 236, 236);
 .week th{
     border:1px solid #ddd;
     color:rgb(255, 255, 255);
-    background-color: #7c2380;
+    background-color: #381794;
 }
 
 .week td{

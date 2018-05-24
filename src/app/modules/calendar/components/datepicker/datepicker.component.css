@@ -15,8 +15,8 @@
     border: none;
   }
   
-  button.dp[disabled] {
-    /*background-color: #e6e6e6;*/
+  button.dp {
+    /* background-color: #e6e6e6; */
   }
   
   .year, .month, .year-arrow, .month-arrow, .day-names {
@@ -54,7 +54,7 @@
     text-align: center;
     padding-top: 0px;
     /*background-color: #666666;*/
-    background-color: #7c2380;
+    background-color: #381794;
     font-family: monospace;
     /*font-weight: bold;*/
   }
@@ -73,7 +73,7 @@
   }
   
   .day.selected {
-    background-color: #7c2380 !important;
+    background-color: #381794 !important;
     color: rgb(255, 255, 255);
     text-decoration:none;
   }

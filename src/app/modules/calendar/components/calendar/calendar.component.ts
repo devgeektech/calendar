@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,OnChanges, SimpleChanges, Input, Output, EventEmitter} from '@angular/core';
 import { FormGroup, FormControl, Validators, FormBuilder, Form, NgForm } from '@angular/forms';
 import { CalendarService } from '../calendar/services/calendar.service';
 import { Router, ActivatedRoute } from '@angular/router';
@@ -15,7 +15,11 @@ import { UiSwitchModule } from 'angular2-ui-switch';
   styleUrls: ['./calendar.component.css'],
   providers:[CalendarService],
 })
-export class CalendarComponent implements OnInit {
+export class CalendarComponent implements OnInit,OnChanges{
+    
+  @Input() date: string;
+  @Output() dateUpdated = new EventEmitter();
+
   calendarForm: FormGroup;
   shiftForm: FormGroup;
   calendar_name = new FormControl('', [
@@ -42,7 +46,7 @@ shiftid:string="";
  calendarShow:string = "month";
  listShow:string= "calendar";
  contactShow:string="group";
-
+ timeZone:string='';
 //  ----
 statusCode:number;
   public calendarResult: any;
@@ -54,11 +58,57 @@ statusCode:number;
 
   public contactResult:any;
   public groupResult:any;
+// ======= Calenadar ======= //
 
-  constructor(private formBuilder: FormBuilder,protected router: Router,protected _calendarService:CalendarService) { }
+months: string[];
+days: number[];
+year: number;
+
+month: number;
+day: number;
+selectedYear: number;
+
+selectedMonth: number;
+selectedDay: number;
+today: Date;
+ 
+
+  constructor(private formBuilder: FormBuilder,protected router: Router,protected _calendarService:CalendarService) {
+      this.timeZone =Intl.DateTimeFormat().resolvedOptions().timeZone;
+    this.months = ['January', 'February', 'March', 'April', 'May', 'June',
+      'July', 'August', 'September', 'October', 'November', 'December'];
+    this.days = [];
+    this.today = new Date();
+    this.selectedYear = this.year = this.today.getFullYear();
+    this.selectedMonth = this.month = this.today.getMonth();
+    this.selectedDay = this.day = this.today.getDate();
+    this.setCalendar();
+    this.dateUpdated.emit(new Date(this.year, this.month, this.day + 1));
+  
+   }
+
+  setCalendar(): void {
+    this.days = [];
+    const firstDay = new Date(this.year, this.month, this.day);
+    firstDay.setDate(1);
+    const lastDay = new Date(this.year, this.month + 1, 0);
+    for (let i = 0; i < firstDay.getDay(); i++) {
+      this.days.push(null);
+    }
+    for (let i = 1; i <= lastDay.getDate(); i++) {
+      this.days.push(i);
+    }
+    while (this.days.length < 42) {
+      this.days.push(null);
+    }
+  }
+
+
+
 
   ngOnInit() {
-    
+    console.log(this.timeZone);
+
     this.calendarForm = this.formBuilder.group({
       calendar_name: this.calendar_name,
       report_to: this.report_to
@@ -79,6 +129,76 @@ statusCode:number;
     this.getAllContactByOrgID()
     // this.getCalendarByFromDateandToDate()
    }
+
+   ngOnChanges(changes: SimpleChanges): void {
+    const reg = /\d\d\d\d-\d\d-\d\d/g;
+    const dt = changes['date'].currentValue;
+    if (dt && reg.exec(dt)) {
+      try {
+        const newDate = new Date(dt);
+        if (isNaN(newDate.getTime())) { throw new Error(); }
+        this.year = newDate.getFullYear();
+        this.month = newDate.getMonth();
+        this.select(newDate.getDate());
+        this.setCalendar();
+      } catch (invalidDateError) {
+        this.select(this.day);
+        this.setCalendar();
+      }
+    } else if (dt && dt.length >= 10) {
+      const newDate = new Date();
+      this.year = newDate.getFullYear();
+      this.month = newDate.getMonth();
+      this.select(newDate.getDate());
+      this.setCalendar();
+    }
+  }
+
+  nextMonth(): void {
+    this.month += 1;
+    if (this.month === 12) {
+      this.month = 0; this.year += 1;
+    }
+    this.setCalendar();
+  }
+
+  prevMonth(): void {
+    this.month -= 1;
+    if (this.month === -1) {
+      this.month = 11; this.year -= 1;
+    }
+    this.setCalendar();
+  }
+
+  nextYear(): void {
+    this.year += 1;
+    this.setCalendar();
+  }
+
+  prevYear(): void {
+    this.year -= 1;
+    this.setCalendar();
+  }
+
+  isSelected(d: number): boolean {
+    return this.year === this.selectedYear
+      && this.month === this.selectedMonth
+      && d === this.selectedDay;
+  }
+
+  select(d: number): void {
+    this.selectedYear = this.year;
+    this.selectedMonth = this.month;
+    this.selectedDay = this.day = d;
+    this.dateUpdated.emit(new Date(this.year, this.month, this.day + 1));
+  }
+
+// ==== calendar ==== //
+
+
+
+
+
   setClassCalendarName() {
     return { 'has-danger': !this.calendar_name.pristine && !this.calendar_name.valid };
   }
