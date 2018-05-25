@@ -79,7 +79,9 @@ today: Date;
  
 
   constructor(private formBuilder: FormBuilder,protected router: Router,protected _calendarService:CalendarService) {
-      this.timeZone =Intl.DateTimeFormat().resolvedOptions().timeZone;
+      
+       
+    this.timeZone =Intl.DateTimeFormat().resolvedOptions().timeZone;
     this.months = ['January', 'February', 'March', 'April', 'May', 'June',
       'July', 'August', 'September', 'October', 'November', 'December'];
     this.days = [];
@@ -741,6 +743,9 @@ getAllContactByOrgID(contactId) {
   let orgId="120";
 this._calendarService.getAllContactByOrgID(orgId,contactId).subscribe(
   data =>   this.contactResult = data);
+
+  
+
 }
 // ----Get All Contact BY OrgID----//
 

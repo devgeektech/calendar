@@ -10,7 +10,7 @@ debugger;
             input = input.toLowerCase();
             return value.filter(function (el: any) {
 
-debugger; return el.firstname.toLowerCase().indexOf(input) > -1;
+debugger; return el.firstName.toLowerCase().indexOf(input) > -1;
             })
         }
         return value;

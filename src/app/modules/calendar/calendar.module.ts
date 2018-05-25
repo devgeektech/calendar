@@ -8,6 +8,7 @@ import { OwlDateTimeModule, OwlNativeDateTimeModule } from 'ng-pick-datetime';
 import { UiSwitchModule } from 'angular2-ui-switch';
 import { ColorPickerModule } from 'ngx-color-picker';
 import { DatePickerDirective } from './components/datepicker/date-picker.directive';
+import {FilterPipe} from '../../shared/pipes/filter.pipe';
 import  { DatePickerComponent } from './components/datepicker/datepicker.component'
 @NgModule({
   imports: [
@@ -20,6 +21,6 @@ import  { DatePickerComponent } from './components/datepicker/datepicker.compone
     UiSwitchModule,
     ColorPickerModule
   ],
-  declarations: [CalendarComponent, DatePickerComponent,DatePickerDirective]
+  declarations: [CalendarComponent, DatePickerComponent,DatePickerDirective,FilterPipe]
 })
 export class CalendarModule { }
