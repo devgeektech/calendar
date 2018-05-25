@@ -30,6 +30,7 @@
     "ng2-filter-pipe": "^0.1.10",
     "ng2-opd-popup": "^1.1.21",
     "ng2-search-filter": "^0.4.7",
+    "ng2-select": "^2.0.0",
     "ngx-color-picker": "^6.2.0",
     "ngx-colorpicker": "^4.0.1",
     "rxjs": "^5.5.6",

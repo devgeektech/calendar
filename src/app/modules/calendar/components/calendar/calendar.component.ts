@@ -76,7 +76,21 @@ selectedYear: number;
 selectedMonth: number;
 selectedDay: number;
 today: Date;
- 
+
+public value:any = [];
+public _disabledV:string = '0';
+public disabled:boolean = false;
+ //public items1:string[];
+ public items:any;
+public items1:Array<string> = ["Amsterdam", "Antwerp", "Athens", "Barcelona",
+    "Berlin", "Birmingham", "Bradford", "Bremen'", "Brussels", "Bucharest",
+    "Budapest", "Cologne", "Copenhagen", "Dortmund", "Dresden", "Dublin", "Düsseldorf",
+    "Essen", "Frankfurt", "Genoa", "Glasgow", "Gothenburg", "Hamburg", "Hannover",
+    "Helsinki", "Leeds", "Leipzig", "Lisbon", "Łódź", "London", "Kraków", "Madrid",
+    "Málaga", "Manchester", "Marseille", "Milan", "Munich", "Naples", "Palermo",
+   "Paris", "Poznań", "Prague", "Riga", "Rome", "Rotterdam", "Seville", "Sheffield",
+    "Sofia", "Stockholm", "Stuttgart", "The Hague", "Turin", "Valencia", "Vienna",
+    "Vilnius", "Warsaw", "Wrocław", "Zagreb", "Zaragoza"];
 
   constructor(private formBuilder: FormBuilder,protected router: Router,protected _calendarService:CalendarService) {
       
@@ -134,6 +148,7 @@ today: Date;
 
     this.getAllGroupByOrgID()
     this.getAllContactByOrgID("")
+    this.getAllContactByOrgID1("")
     // this.getCalendarByFromDateandToDate()
    }
 
@@ -742,9 +757,33 @@ today: Date;
 getAllContactByOrgID(contactId) {
   let orgId="120";
 this._calendarService.getAllContactByOrgID(orgId,contactId).subscribe(
-  data =>   this.contactResult = data);
+  data =>  this.contactResult = data);
+ }
+getAllContactByOrgID1(contactId) {
+  let orgId="120";
 
-  
+  this._calendarService.getAllContactByOrgID(orgId,contactId)
+  .subscribe(data => {
+    
+   // Array.from(data.Result).forEach(function (child) {
+    
+    this.items = data.Result.map(a =>a.emailIds.office)
+    //var item = data.Result.map(a =>a.emailIds.office)
+      
+     // this.items.push(item);
+    
+    
+    
+    console.log(this.items);
+      
+     //this.items.push(item);
+//  });
+
+    });
+  // console.log("Contact List",this.items);
+
+   
+
 
 }
 // ----Get All Contact BY OrgID----//
@@ -780,16 +819,41 @@ onSelect(groupId:string) {
   //{
     
     this.contactid.push(_id)
-  //}
-  //else if(e.target.checked==false)
-  //{
-  //  console.log("Contactid",_id)
-   // this.contactid.indexOf(_id)
-  //}
+  
 
     console.log("Array contact", this.contactid)
 
-  }  
+  } 
+  
+  public get disabledV():string {
+    return this._disabledV;
+  }
+
+  public set disabledV(value:string) {
+    this._disabledV = value;
+    this.disabled = this._disabledV === '1';
+  }
+
+  public selected(value:any):void {
+    console.log('Selected value is: ', value);
+  }
+
+  public removed(value:any):void {
+    console.log('Removed value is: ', value);
+  }
+
+  public refreshValue(value:any):void {
+    this.value = value;
+  }
+
+  public itemsToString(value:Array<any> = []):string {
+    return value
+      .map((item:any) => {
+        return item.text;
+      }).join(',');
+  }
+
+
   }
   
   

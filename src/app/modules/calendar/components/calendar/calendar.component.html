@@ -148,7 +148,16 @@
                   <div class="form-group row" [ngClass]="setClassReportTo()">
                     <label for="message-text" class="col-sm-3 col-form-label">Report To</label>
                     <div class="col-sm-9">
-                    <textarea class="form-control" name="report_to" formControlName="report_to" placeholder="Report To"></textarea>
+                    <!--<textarea class="form-control" name="report_to" formControlName="report_to" placeholder="Report To"></textarea>-->
+                    <ng-select  [multiple]="true"
+                    [items]="items"
+                    
+                    (data)="refreshValue($event)"
+                    (selected)="selected($event)"
+                    (removed)="removed($event)"
+                    placeholder="No Report To selected"></ng-select>
+                    
+       
                   </div>
                   </div>
                 </form>  
@@ -1236,7 +1245,7 @@
           </button>
         </div>
         <div class="modal-body">
-                <form [formGroup]="shiftForm" (ngSubmit)="editShiftTest(shiftForm)">
+                <form [formGroup]="shiftForm">
                         <div class="form-group" [ngClass]="setClassShiftName()">
                           <!--<label for="recipient-name" class="col-form-label">Calendar Name:</label>-->
                           
@@ -1279,7 +1288,11 @@
                        
                                     <div><p align="right">{{contactResult.Result ? contactResult.Result.length : ''}} Contacts</p></div>
                                    <div class="search-box-wrapper form-group">
-                                       <input type="text" class="search-box-input form-control"  >
+
+                                       
+
+                                       <input type="text" class="search-box-input form-control" #term>
+
                                        <button class="btn btn-primary searchbutton" ><i class="fas fa-search"></i>
                        
                                        </button> 
@@ -1289,7 +1302,10 @@
                                    <!-- List -->
                                    <div>
                                        
-                                      <div *ngFor="let result of contactResult.Result"><input type="checkbox">   <span style="margin-left: 10px">{{result.firstName}} </span><span>{{result.lastName}}</span></div>
+
+                                      <div *ngFor="let result of contactResult.Result | FilterPipe: term.value"><input type="checkbox">   <span style="margin-left: 10px">{{result.firstName}} </span><span>{{result.lastName}}</span></div>
+
+                                     
                                        
                                    </div>
                                  </div> 
@@ -1298,11 +1314,14 @@
                                 <div *ngIf="contactShow == 'email'"  class="main">
                        
                                    <div class="search-box-wrapper form-group">
-                                       <input type="text" class="search-box-input form-control">
+                                       <input type="text" class="search-box-input form-control" #term>
+                                       <button class="btn btn-primary searchbutton" ><i class="fas fa-search"></i>
+                       
+                                       </button> 
                                        <!-- List -->
                                    <div>
                                     
-                                     <div *ngFor="let result of contactResult.Result" ><span>{{result.firstName}} </span><span>{{result.lastName}}</span><br/>
+                                     <div *ngFor="let result of contactResult.Result | FilterPipe: term.value" ><span>{{result.firstName}} </span><span>{{result.lastName}}</span><br/>
                                     <span >{{result.emailIds.office}}</span>
                                      </div>
                                     
@@ -1489,7 +1508,7 @@
                     </button>
                   </div>
                   <div class="modal-body">
-                          <form [formGroup]="shiftForm" (ngSubmit)="createShiftTest(shiftForm)">
+                          <form [formGroup]="shiftForm">
                                   <div class="form-group" [ngClass]="setClassShiftName()">
                                     <!--<label for="recipient-name" class="col-form-label">Calendar Name:</label>-->
                                     
@@ -1532,7 +1551,7 @@
                                
                                             <div><p align="right">{{contactResult.Result ? contactResult.Result.length : ''}} Contacts</p></div>
                                            <div class="search-box-wrapper form-group">
-                                               <input type="text" class="search-box-input form-control" [(ngModel)]="term">
+                                               <input type="text" class="search-box-input form-control" #term>
                                                <button class="btn btn-primary searchbutton" ><i class="fas fa-search"></i>
                                
                                                </button> 
@@ -1542,7 +1561,7 @@
                                            <!-- List -->
                                            <div>
                                                
-                                              <div *ngFor="let result of contactResult.Result " ><input type="checkbox" name="{{result._id}}" value="{{result._id}}"  (change)="OnCheckedContact(result._id,$event.target.value)" >   <span style="margin-left: 10px">{{result.firstName}} </span><span>{{result.lastName}}</span></div>
+                                              <div *ngFor="let result of contactResult.Result| FilterPipe: term.value" ><input type="checkbox" name="{{result._id}}" value="{{result._id}}"  (change)="OnCheckedContact(result._id,$event.target.value)" >   <span style="margin-left: 10px">{{result.firstName}} </span><span>{{result.lastName}}</span></div>
                                                
                                            </div>
                                          </div> 
@@ -1551,11 +1570,16 @@
                                         <div *ngIf="contactShow == 'email'"  class="main">
                                
                                            <div class="search-box-wrapper form-group">
-                                               <input type="text" class="search-box-input form-control">
+                                            <input type="text" class="search-box-input form-control" #term>
+                                            <button class="btn btn-primary searchbutton" ><i class="fas fa-search"></i>
+                            
+                                            </button> 
+                                   
+                                               
                                                <!-- List -->
                                            <div>
                                             
-                                             <div *ngFor="let result of contactResult.Result" ><span>{{result.firstName}} </span><span>{{result.lastName}}</span><br/>
+                                             <div *ngFor="let result of contactResult.Result | FilterPipe: term.value" ><span>{{result.firstName}} </span><span>{{result.lastName}}</span><br/>
                                             <span >{{result.emailIds.office}}</span>
                                              </div>
                                             
