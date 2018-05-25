@@ -1,12 +1,32 @@
 <div class="date-picker">
     <button class="dp year-arrow" (click)="prevYear()">&lt;</button><button class="dp year">{{year}}</button><button class="dp year-arrow" (click)="nextYear()">&gt;</button>
     <button class="dp month-arrow" (click)="prevMonth()">&lt;</button><button class="dp month">{{months[month]}}</button><button class="dp month-arrow" (click)="nextMonth()">&gt;</button>
-    <div class="dp day-names">
+    <!-- <div class="dp day-names">
       <span>S</span><span>M</span><span>T</span><span>W</span><span>T</span><span>F</span><span>S</span>
-    </div>
+    </div> -->
     <div class="days">
-    <button *ngFor="let nday of days" class="dp day" [disabled]="nday === null"
-            [ngClass]="{day: true, selected: isSelected(nday), exists: (nday!=null)}" (click)="select(nday)">{{nday || ''}}</button>
+      
+    <!-- <button *ngFor="let nday of days" class="dp day" [disabled]="nday === null"
+            [ngClass]="{day: true, selected: isSelected(nday), exists: (nday!=null)}" (click)="select(nday)">{{nday || ''}}</button> -->
+      <table>
+        <thead>
+          <td>S</td>
+          <td>M</td>
+          <td>T</td>
+          <td>W</td>
+          <td>T</td>
+          <td>F</td>
+          <td>S</td>
+        </thead>
+        <tbody>
+            <tr *ngFor="let week of days" class="dp day">
+                <td *ngFor="let nday of week" [ngClass]="{day: true, selected: isSelected(nday), exists: (nday!=null)}" (click)="select(nday)">
+                    {{nday || ''}}
+                </td>
+              </tr>
+        </tbody>
+        
+      </table>
     </div>
   </div>
   

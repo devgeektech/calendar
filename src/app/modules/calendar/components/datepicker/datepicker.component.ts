@@ -10,7 +10,8 @@ export class DatePickerComponent implements OnInit, OnChanges {
   @Output() dateUpdated = new EventEmitter();
   months: string[];
 
-  days: number[];
+  days: any[];
+  week: number[]
   year: number;
 
   month: number;
@@ -38,18 +39,34 @@ export class DatePickerComponent implements OnInit, OnChanges {
 
   setCalendar(): void {
     this.days = [];
+    this.week = [];
     const firstDay = new Date(this.year, this.month, this.day);
     firstDay.setDate(1);
     const lastDay = new Date(this.year, this.month + 1, 0);
     for (let i = 0; i < firstDay.getDay(); i++) {
-      this.days.push(null);
+      //this.days.push(null);
+      this.week.push(null);
     }
     for (let i = 1; i <= lastDay.getDate(); i++) {
-      this.days.push(i);
+      if(this.week.length < 6){
+        this.week.push(i);
+        if(i==lastDay.getDate()){
+          while(this.week.length<7){
+            this.week.push(null);
+          }
+          this.days.push(this.week);
+        }
+      }else if(this.week.length==6){
+        this.week.push(i);
+        this.days.push(this.week);
+        this.week = [];
+      }
+      //this.days.push(i);
     }
-    while (this.days.length < 42) {
-      this.days.push(null);
-    }
+    // while (this.days.length < 42) {
+    //   this.days.push(null);
+    // }
+    console.log("days ",this.days);
   }
 
   ngOnChanges(changes: SimpleChanges): void {

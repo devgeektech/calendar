@@ -62,12 +62,16 @@
   .days {
     background-color: #fff;
   }
+  .days td{
+    text-align:center;
+  }
   
   .day {
-    padding-bottom: 25px;
+    /* padding-bottom: 25px; */
     width: 28.57px;
     height: 28.57px;
     vertical-align: middle;
+    text-align: center;
     background-color: #fff;
     color: #4a4a4a;
   }
