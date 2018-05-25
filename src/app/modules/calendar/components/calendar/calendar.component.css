@@ -11,6 +11,9 @@
 .main-container{
     background:#fff;
 }
+.calendar-title{
+    margin: 40px 11px;
+}
 .day.active{
     border-radius: 13px;
 }
@@ -54,7 +57,9 @@ width:100%;
     border: none;
     background: none;
     outline:none;}
-
+.btn-custom{
+    border: 1px solid #ccc;
+}
 
 
 
@@ -149,7 +154,7 @@ width:100%;
     float: left;
     width: 100%;
     color:rgb(94, 94, 94);
-    font-weight:400;
+    font-weight:600;
 }
 .calendar-list a .three-dots{
     display:none;
@@ -174,7 +179,7 @@ margin-left:15px;
     color:rgb(94, 94, 94);
     display: block;
     cursor:default;
-    font-weight:400;
+    font-weight:600;
 
     
     background-color:rgb(224, 223, 223);

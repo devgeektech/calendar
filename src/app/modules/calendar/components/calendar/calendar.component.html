@@ -1,6 +1,6 @@
 <div class="main-container">
   <div class="container">
-    <h2 class="text-uppercase">Calendar</h2>
+    <h2 class="text-uppercase calendar-title">Calendar</h2>
     <div class="col-md-3 col-sm-12 col-lg-3">
 
       <app-date-picker></app-date-picker>
@@ -206,19 +206,19 @@
     <div class="col-md-9 col-sm-12 col-lg-9">
        <div >
        <div class="button-left pull-left" >
-         <button type="button" (click)="prevMonth()"> &#10094;</button>
-         <button type="button" (click)="nextMonth()">&#10095;</button>
+         <button class="btn btn-custom pull-left" type="button" (click)="prevMonth()"> <i class="fa fa-chevron-left"></i></button>
+         <button class="btn btn-custom" type="button" (click)="nextMonth()"><i class="fa fa-chevron-right"></i></button>
          <div class="day1">
             
-            <button type="button">today</button><span>{{months[month]}} {{year}}</span></div>
+            <button class="btn btn-custom" type="button">today</button><span>{{months[month]}} {{year}}</span></div>
           
          </div>
 </div>
       <span class="button-right pull-right">
-        <button type="button" (click)="calendarShow='month'">month</button>
-        <button type="button" (click)="calendarShow='week'">week</button>
-        <button type="button" (click)="calendarShow='days'">day</button>
-        <button type="button" (click)="calendarShow='list';CalendarShow()">list</button>
+        <button class="btn btn-custom pull-left" type="button" (click)="calendarShow='month'">month</button>
+        <button class="btn btn-custom pull-left" type="button" (click)="calendarShow='week'">week</button>
+        <button class="btn btn-custom" type="button" (click)="calendarShow='days'">day</button>
+        <button class="btn btn-custom" type="button" (click)="calendarShow='list';CalendarShow()">list</button>
       </span>
       <!-- month-->
       <div *ngIf="calendarShow == 'month'">

@@ -1,8 +1,8 @@
 .date-picker {
-    width: 200px;
+    width: 100%;
     /* position: absolute; */
-    z-index: 999;
-    left: calc(100% - 200px);
+    /* z-index: 999;
+    left: calc(100% - 200px); */
  
   }
   
@@ -29,10 +29,12 @@
   .year-arrow {
     width: 40px;
   }
-  
+  .date-year-container{
+    font-weight: 600;
+  }
   
   .year {
-    width: 120px;
+    /* width: 120px; */
   }
   
   .month-arrow {
@@ -40,7 +42,7 @@
   }
   
   .month {
-    width: 120px;
+    /* width: 120px; */
   }
   
   .day-names {
@@ -65,24 +67,36 @@
   .days td{
     text-align:center;
   }
-  
+  .days tbody{
+    font-weight: 600;
+  }
+  .days tbody td{
+    cursor: pointer;
+  }
   .day {
     /* padding-bottom: 25px; */
-    width: 28.57px;
-    height: 28.57px;
+    /* width: 28.57px;
+    height: 28.57px; */
     vertical-align: middle;
     text-align: center;
     background-color: #fff;
     color: #4a4a4a;
   }
-  
+  .days table{
+    width:100%;
+  }
   .day.selected {
     background-color: #381794 !important;
     color: rgb(255, 255, 255);
     text-decoration:none;
+    border-radius: 15px;
+    padding: 5px 0px;
   }
   
   .day.exists {
     background-color: #fff;
+  }
+  .paddingB10{
+    padding-bottom: 10px;
   }
   

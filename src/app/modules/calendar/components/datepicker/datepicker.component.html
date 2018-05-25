@@ -1,6 +1,15 @@
 <div class="date-picker">
-    <button class="dp year-arrow" (click)="prevYear()">&lt;</button><button class="dp year">{{year}}</button><button class="dp year-arrow" (click)="nextYear()">&gt;</button>
-    <button class="dp month-arrow" (click)="prevMonth()">&lt;</button><button class="dp month">{{months[month]}}</button><button class="dp month-arrow" (click)="nextMonth()">&gt;</button>
+    <!-- <button class="dp year-arrow" (click)="prevYear()"><i class="fa fa-chevron-left"></i></button>
+    <button class="dp year-arrow" (click)="nextYear()"><i class="fa fa-chevron-right"></i></button> -->
+    <div>
+        <span class="date-year-container">{{months[month]}} {{year}}</span>
+        <span class="text-right pull-right">
+            <button class="dp month-arrow" (click)="prevMonth()"><i class="fa fa-chevron-left"></i></button>
+            <button class="dp month-arrow" (click)="nextMonth()"><i class="fa fa-chevron-right"></i></button>
+        </span>
+    </div>
+    
+
     <!-- <div class="dp day-names">
       <span>S</span><span>M</span><span>T</span><span>W</span><span>T</span><span>F</span><span>S</span>
     </div> -->
