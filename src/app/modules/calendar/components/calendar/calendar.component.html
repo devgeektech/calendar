@@ -151,7 +151,7 @@
                     <!--<textarea class="form-control" name="report_to" formControlName="report_to" placeholder="Report To"></textarea>-->
                     <ng-select  [multiple]="true"
                     [items]="items"
-                    
+                    name="report_to" formControlName="report_to"
                     (data)="refreshValue($event)"
                     (selected)="selected($event)"
                     (removed)="removed($event)"
@@ -219,9 +219,7 @@
          <button class="btn btn-custom" type="button" (click)="nextMonth()"><i class="fa fa-chevron-right"></i></button>
          <div class="day1">
             
-            <button class="btn btn-custom" type="button" [disabled]="todayDisabled == 0"
-            
-             (click)="currentMonth()">today</button><span>{{months[month]}} {{year}}</span></div>
+            <button class="btn btn-custom" type="button">today</button><span>{{months[month]}} {{year}}</span></div>
           
          </div>
 </div>
@@ -1403,7 +1401,15 @@
                           </div>
                           <div class="form-group" [ngClass]="setClassReportTo()">
                            <!-- <label for="message-text" class="col-form-label">Report To:</label>-->
-                            <textarea class="form-control" name="report_to" [ngModel]="EditCalendarResult?.emailNotificationList" formControlName="report_to" placeholder="Report To"></textarea>
+                            <!--<textarea class="form-control" name="report_to" [ngModel]="EditCalendarResult?.emailNotificationList" formControlName="report_to" placeholder="Report To"></textarea>-->
+                            <ng-select  [multiple]="true"
+                            [items]="items"
+                            name="report_to"  [ngModel]="EditCalendarResult?.emailNotificationList" formControlName="report_to"
+                            (data)="refreshValue($event)"
+                            (selected)="selected($event)"
+                            (removed)="removed($event)"
+                            placeholder="No Report To selected"></ng-select>
+                           
                           </div>
                         </form>
                 
@@ -1436,7 +1442,7 @@
                         <div class="col-md-5" align="left">
                       
 
-                        <button type="button" class="btn btn-primary"  data-toggle="modal" data-target="#createShift">
+                        <button type="button" class="btn btn-primary"      data-toggle="modal"  data-target="#createShift">
                             Add Shift
                            </button>
                           </div>

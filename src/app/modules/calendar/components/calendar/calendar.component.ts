@@ -83,15 +83,8 @@ public _disabledV:string = '0';
 public disabled:boolean = false;
  //public items1:string[];
  public items:any;
-public items1:Array<string> = ["Amsterdam", "Antwerp", "Athens", "Barcelona",
-    "Berlin", "Birmingham", "Bradford", "Bremen'", "Brussels", "Bucharest",
-    "Budapest", "Cologne", "Copenhagen", "Dortmund", "Dresden", "Dublin", "Düsseldorf",
-    "Essen", "Frankfurt", "Genoa", "Glasgow", "Gothenburg", "Hamburg", "Hannover",
-    "Helsinki", "Leeds", "Leipzig", "Lisbon", "Łódź", "London", "Kraków", "Madrid",
-    "Málaga", "Manchester", "Marseille", "Milan", "Munich", "Naples", "Palermo",
-   "Paris", "Poznań", "Prague", "Riga", "Rome", "Rotterdam", "Seville", "Sheffield",
-    "Sofia", "Stockholm", "Stuttgart", "The Hague", "Turin", "Valencia", "Vienna",
-    "Vilnius", "Warsaw", "Wrocław", "Zagreb", "Zaragoza"];
+ 
+ calendarReportTo: any[] = [];
 
   constructor(private formBuilder: FormBuilder,protected router: Router,protected _calendarService:CalendarService) {
       
@@ -262,9 +255,9 @@ public items1:Array<string> = ["Amsterdam", "Antwerp", "Athens", "Barcelona",
           "5af037ec8914a24f6bb00809"
       ],
       "active": "true",
-      "emailNotificationList": [
-        this.calendarForm.value.report_to,
-      ],
+      "emailNotificationList": 
+      this.calendarReportTo,
+      
       "emailNotificationEnabled": "false",
       "createdDate": "1522520474547",
       "createdDateString":  new Date(),
@@ -339,7 +332,7 @@ public items1:Array<string> = ["Amsterdam", "Antwerp", "Athens", "Barcelona",
      this._calendarService.getSchedulingCalendarByCalendarID(calendarid).subscribe(
       data =>  { this.EditCalendarResult = data[0]
       console.log("Edit data",this.EditCalendarResult)
-      
+      this.show=false;
       });
     }
   // ----Edit Calendar----//
@@ -360,9 +353,9 @@ public items1:Array<string> = ["Amsterdam", "Antwerp", "Athens", "Barcelona",
           "5af037ec8914a24f6bb00809"
       ],
       "active": "true",
-      "emailNotificationList": [
-        this.calendarForm.value.report_to,
-      ],
+      "emailNotificationList": 
+        this.calendarReportTo,
+    
       "emailNotificationEnabled": "false",
       "createdDate": "1522520474547",
       "createdDateString":  new Date(),
@@ -839,11 +832,18 @@ onSelect(groupId:string) {
   }
 
   public selected(value:any):void {
+    
     console.log('Selected value is: ', value);
+    this.calendarReportTo.push(value.text);
+    console.log("selected COntact",this.calendarReportTo);
   }
 
   public removed(value:any):void {
     console.log('Removed value is: ', value);
+    var index = this.calendarReportTo.indexOf(value.text);
+    console.log("contact index",index)
+    this.calendarReportTo.splice(index, 1);
+    console.log("list",this.calendarReportTo)
   }
 
   public refreshValue(value:any):void {
@@ -862,6 +862,10 @@ currentMonth(){
   this.todayDisabled = 0;
   this.setCalendar();
 
+}
+ShowCalendarDetails()
+{
+  this.show=false;
 }
   }
   
