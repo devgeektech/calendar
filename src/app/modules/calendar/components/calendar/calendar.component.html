@@ -176,7 +176,7 @@
         </div>
       </div>
       <div class="line"></div>
-      <div class="calendar-text">
+      <div class="calendar-text" *ngIf="calendarResult.length == 0">
         <p> There are no calendars Please create a calendar by Clicking on '+' icon above.
         </p>
       </div>
@@ -188,7 +188,7 @@
         </div>
 
 
-      <div class="row list-container">
+      <div class="row list-container" >
       <ul class="calendar-list">
         <!--<div class="squaredThree">-->
         <li *ngFor="let result of calendarResult">
