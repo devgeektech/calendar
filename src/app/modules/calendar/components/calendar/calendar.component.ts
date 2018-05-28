@@ -60,9 +60,10 @@ statusCode:number;
   private color: string = "#0299e5";
   private status:string="InActive";
   isChecked:boolean=false;
-
+  
   public contactResult:any;
   public groupResult:any;
+  todayDisabled:number = 0;
 // ======= Calenadar ======= //
 
 months: string[];
@@ -178,6 +179,7 @@ public items1:Array<string> = ["Amsterdam", "Antwerp", "Athens", "Barcelona",
 
   nextMonth(): void {
     this.month += 1;
+      this.todayDisabled += 1;
     if (this.month === 12) {
       this.month = 0; this.year += 1;
     }
@@ -186,6 +188,8 @@ public items1:Array<string> = ["Amsterdam", "Antwerp", "Athens", "Barcelona",
 
   prevMonth(): void {
     this.month -= 1;
+    this.todayDisabled -= 1;
+
     if (this.month === -1) {
       this.month = 11; this.year -= 1;
     }
@@ -852,8 +856,13 @@ onSelect(groupId:string) {
         return item.text;
       }).join(',');
   }
+currentMonth(){
+  const newDate = new Date();
+  this.month = newDate.getMonth();
+  this.todayDisabled = 0;
+  this.setCalendar();
 
-
+}
   }
   
   

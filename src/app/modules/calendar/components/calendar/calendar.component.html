@@ -219,7 +219,9 @@
          <button class="btn btn-custom" type="button" (click)="nextMonth()"><i class="fa fa-chevron-right"></i></button>
          <div class="day1">
             
-            <button class="btn btn-custom" type="button">today</button><span>{{months[month]}} {{year}}</span></div>
+            <button class="btn btn-custom" type="button" [disabled]="todayDisabled == 0"
+            
+             (click)="currentMonth()">today</button><span>{{months[month]}} {{year}}</span></div>
           
          </div>
 </div>
